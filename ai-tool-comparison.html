@@ -6,6 +6,25 @@
     <title>Enterprise AI Tools Comparison Matrix 2025</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-gradient-dark: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            --card-bg: #ffffff;
+            --card-bg-dark: #2d3748;
+            --text-color: #2d3748;
+            --text-color-dark: #e2e8f0;
+            --text-muted: #666666;
+            --text-muted-dark: #a0aec0;
+            --accent-color: #667eea;
+            --accent-hover: #5a67d8;
+            --border-color: #e2e8f0;
+            --border-color-dark: #4a5568;
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+            --tier-bg: #f7fafc;
+            --tier-bg-dark: #4a5568;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,41 +33,146 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #2d3748;
+            background: var(--bg-gradient);
+            color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: var(--bg-gradient-dark);
+            color: var(--text-color-dark);
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+        }
+
+        .header-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .style-selector {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .style-selector:hover {
+            border-color: var(--accent-color);
+        }
+
+        .style-selector option {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .style-selector {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        [data-theme="dark"] .style-selector option {
+            background: var(--card-bg-dark);
+            color: var(--text-color-dark);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            width: 60px;
+            height: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 2px;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-color);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+
+        [data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(28px);
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
-            background: white;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .header {
+            background: var(--card-bg-dark);
+            box-shadow: 0 20px 60px var(--shadow-dark);
         }
 
         .header h1 {
             font-size: 2.5rem;
-            color: #2d3748;
+            color: var(--text-color);
             margin-bottom: 15px;
             background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .header h1 {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .header p {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             max-width: 800px;
             margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .header p {
+            color: var(--text-muted-dark);
         }
 
         .category-nav {
@@ -61,15 +185,21 @@
 
         .category-btn {
             padding: 12px 24px;
-            background: white;
+            background: var(--card-bg);
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-size: 0.95rem;
             font-weight: 600;
-            color: #667eea;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: var(--accent-color);
+            box-shadow: 0 4px 15px var(--shadow);
             transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .category-btn {
+            background: var(--card-bg-dark);
+            color: var(--accent-color);
+            box-shadow: 0 4px 15px var(--shadow-dark);
         }
 
         .category-btn:hover, .category-btn.active {
@@ -87,12 +217,18 @@
         }
 
         .tool-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--shadow);
             transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .tool-card {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
         }
 
         .tool-card:hover {
@@ -110,18 +246,27 @@
         .tool-name {
             font-size: 1.4rem;
             font-weight: 700;
-            color: #2d3748;
+            color: var(--text-color);
             margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .tool-name {
+            color: var(--text-color-dark);
         }
 
         .tool-name a {
-            color: #2d3748;
+            color: var(--text-color);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
+        [data-theme="dark"] .tool-name a {
+            color: var(--text-color-dark);
+        }
+
         .tool-name a:hover {
-            color: #667eea;
+            color: var(--accent-color);
         }
 
         .pricing-link {
@@ -157,10 +302,15 @@
         }
 
         .tool-description {
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 20px;
             line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .tool-description {
+            color: var(--text-muted-dark);
         }
 
         .pricing-section {
@@ -187,9 +337,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 12px;
-            background: #f7fafc;
+            background: var(--tier-bg);
             border-radius: 8px;
             font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="dark"] .pricing-tier {
+            background: var(--tier-bg-dark);
         }
 
         .tier-name {
@@ -403,8 +558,18 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="light" data-style="default">
     <div class="container">
+        <div class="header-controls">
+            <select class="style-selector" id="styleSelector">
+                <option value="default">Default</option>
+                <option value="glassmorphism">Glassmorphism</option>
+                <option value="neumorphism">Neumorphism</option>
+            </select>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <div class="theme-toggle-slider">☀️</div>
+            </button>
+        </div>
         <div class="header">
             <h1>Enterprise AI Tools Comparison Matrix 2025</h1>
             <p>Comprehensive comparison of AI platforms, development tools, coding assistants, and IDEs for software companies. Evaluate pricing, features, security, and available models to make informed technology decisions.</p>
@@ -1438,6 +1603,48 @@
 
         // Initialize
         filterTools();
+
+        // Theme system
+        const themeToggle = document.getElementById('themeToggle');
+        const styleSelector = document.getElementById('styleSelector');
+        const slider = themeToggle.querySelector('.theme-toggle-slider');
+
+        // Load saved preferences or default values
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedStyle = localStorage.getItem('style') || 'default';
+        
+        document.body.setAttribute('data-theme', savedTheme);
+        document.body.setAttribute('data-style', savedStyle);
+        styleSelector.value = savedStyle;
+        updateToggleIcon(savedTheme);
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleIcon(newTheme);
+        });
+
+        // Style selector functionality
+        styleSelector.addEventListener('change', (e) => {
+            const newStyle = e.target.value;
+            document.body.setAttribute('data-style', newStyle);
+            localStorage.setItem('style', newStyle);
+        });
+
+        function updateToggleIcon(theme) {
+            // Show sun when light mode (click to go to dark)
+            // Show moon when dark mode (click to go to light)
+            slider.textContent = theme === 'light' ? '☀️' : '🌙';
+        }
+
+        // Add smooth transitions when styles change
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        });
     </script>
 </body>
 </html>
