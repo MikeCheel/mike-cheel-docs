@@ -803,6 +803,120 @@
             transition: color 0.3s ease;
         }
 
+        /* Category Explanations Section */
+        .category-explanations {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .category-explanations {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .explanations-title {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .explanations-title {
+            color: var(--text-color-dark);
+        }
+
+        .explanations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .explanation-card {
+            padding: 20px;
+            background: var(--tier-bg);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .explanation-card {
+            background: var(--tier-bg-dark);
+        }
+
+        .explanation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow);
+            border-color: var(--accent-color);
+            background: var(--card-bg);
+        }
+
+        [data-theme="dark"] .explanation-card:hover {
+            background: var(--card-bg-dark);
+        }
+
+        .explanation-title {
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .explanation-text {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        [data-theme="dark"] .explanation-text {
+            color: var(--text-muted-dark);
+        }
+
+        /* Last Updated Section */
+        .last-updated {
+            margin-top: 40px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .last-updated {
+            border-top-color: var(--border-color-dark);
+        }
+
+        .last-updated-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .last-updated-content {
+            color: var(--text-muted-dark);
+        }
+
+        .last-updated-icon {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .last-updated-text {
+            font-weight: 500;
+        }
+
         /* Key Insights Section Styles */
         .insights-section {
             background: var(--card-bg);
@@ -929,7 +1043,8 @@
         [data-style="glassmorphism"] .tool-card,
         [data-style="glassmorphism"] .comparison-section,
         [data-style="glassmorphism"] .recommendation-box,
-        [data-style="glassmorphism"] .insights-section {
+        [data-style="glassmorphism"] .insights-section,
+        [data-style="glassmorphism"] .category-explanations {
             background: rgba(255, 255, 255, 0.25) !important;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -942,7 +1057,8 @@
         [data-style="glassmorphism"][data-theme="dark"] .tool-card,
         [data-style="glassmorphism"][data-theme="dark"] .comparison-section,
         [data-style="glassmorphism"][data-theme="dark"] .recommendation-box,
-        [data-style="glassmorphism"][data-theme="dark"] .insights-section {
+        [data-style="glassmorphism"][data-theme="dark"] .insights-section,
+        [data-style="glassmorphism"][data-theme="dark"] .category-explanations {
             background: rgba(45, 55, 72, 0.4) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
@@ -958,10 +1074,15 @@
         [data-style="glassmorphism"] .pricing-tier,
         [data-style="glassmorphism"] .model-item,
         [data-style="glassmorphism"] .security-badge,
-        [data-style="glassmorphism"] .insight-card {
+        [data-style="glassmorphism"] .insight-card,
+        [data-style="glassmorphism"] .explanation-card {
             background: rgba(255, 255, 255, 0.2) !important;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        [data-style="glassmorphism"] .last-updated {
+            border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
         }
 
         [data-style="glassmorphism"][data-theme="dark"] .style-selector,
@@ -974,9 +1095,14 @@
         [data-style="glassmorphism"][data-theme="dark"] .pricing-tier,
         [data-style="glassmorphism"][data-theme="dark"] .model-item,
         [data-style="glassmorphism"][data-theme="dark"] .security-badge,
-        [data-style="glassmorphism"][data-theme="dark"] .insight-card {
+        [data-style="glassmorphism"][data-theme="dark"] .insight-card,
+        [data-style="glassmorphism"][data-theme="dark"] .explanation-card {
             background: rgba(30, 41, 59, 0.3) !important;
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        [data-style="glassmorphism"][data-theme="dark"] .last-updated {
+            border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
 
         /* Neumorphism Style */
@@ -994,7 +1120,8 @@
         [data-style="neumorphism"] .tool-card,
         [data-style="neumorphism"] .comparison-section,
         [data-style="neumorphism"] .recommendation-box,
-        [data-style="neumorphism"] .insights-section {
+        [data-style="neumorphism"] .insights-section,
+        [data-style="neumorphism"] .category-explanations {
             background: #e0e5ec !important;
             box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff !important;
             border: none !important;
@@ -1006,7 +1133,8 @@
         [data-style="neumorphism"][data-theme="dark"] .tool-card,
         [data-style="neumorphism"][data-theme="dark"] .comparison-section,
         [data-style="neumorphism"][data-theme="dark"] .recommendation-box,
-        [data-style="neumorphism"][data-theme="dark"] .insights-section {
+        [data-style="neumorphism"][data-theme="dark"] .insights-section,
+        [data-style="neumorphism"][data-theme="dark"] .category-explanations {
             background: #2d3748 !important;
             box-shadow: 20px 20px 60px #1a202c, -20px -20px 60px #404c5a !important;
         }
@@ -1022,7 +1150,8 @@
         [data-style="neumorphism"] .pricing-tier,
         [data-style="neumorphism"] .model-item,
         [data-style="neumorphism"] .security-badge,
-        [data-style="neumorphism"] .insight-card {
+        [data-style="neumorphism"] .insight-card,
+        [data-style="neumorphism"] .explanation-card {
             background: #e0e5ec !important;
             box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff !important;
             border: none !important;
@@ -1044,9 +1173,18 @@
         [data-style="neumorphism"][data-theme="dark"] .pricing-tier,
         [data-style="neumorphism"][data-theme="dark"] .model-item,
         [data-style="neumorphism"][data-theme="dark"] .security-badge,
-        [data-style="neumorphism"][data-theme="dark"] .insight-card {
+        [data-style="neumorphism"][data-theme="dark"] .insight-card,
+        [data-style="neumorphism"][data-theme="dark"] .explanation-card {
             background: #2d3748 !important;
             box-shadow: inset 5px 5px 10px #1a202c, inset -5px -5px 10px #404c5a !important;
+        }
+
+        [data-style="neumorphism"] .last-updated {
+            border-top: 1px solid #bebebe !important;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] .last-updated {
+            border-top: 1px solid #404c5a !important;
         }
 
         [data-style="neumorphism"][data-theme="dark"] .tool-card:hover,
@@ -1074,6 +1212,10 @@
             }
 
             .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .explanations-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1156,6 +1298,33 @@
                 <div class="filter-group">
                     <label class="filter-label">Search Tools</label>
                     <input type="text" id="searchInput" placeholder="Search by name or feature...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Explanations -->
+        <div class="category-explanations">
+            <h3 class="explanations-title">🧠 Understanding AI Tool Categories</h3>
+            <div class="explanations-grid">
+                <div class="explanation-card">
+                    <h4 class="explanation-title">🏗️ Foundation Models</h4>
+                    <p class="explanation-text">Core AI models (like GPT-4, Claude) that provide the underlying intelligence. Think of them as the "brain" that powers other AI applications through APIs.</p>
+                </div>
+                <div class="explanation-card">
+                    <h4 class="explanation-title">⚒️ Development Tools</h4>
+                    <p class="explanation-text">Specialized environments for building applications with AI assistance. These help developers create software faster with AI-powered features.</p>
+                </div>
+                <div class="explanation-card">
+                    <h4 class="explanation-title">💻 Coding Assistants</h4>
+                    <p class="explanation-text">AI tools that help write, review, and debug code. They integrate into your editor to provide real-time coding suggestions and automation.</p>
+                </div>
+                <div class="explanation-card">
+                    <h4 class="explanation-title">🎯 All-in-One Platforms</h4>
+                    <p class="explanation-text">Comprehensive solutions that bundle multiple AI capabilities (text, image, video) into a single subscription, replacing multiple separate tools.</p>
+                </div>
+                <div class="explanation-card">
+                    <h4 class="explanation-title">⌨️ Terminal Tools</h4>
+                    <p class="explanation-text">AI-enhanced command line interfaces that help developers interact with systems, write scripts, and automate infrastructure tasks more efficiently.</p>
                 </div>
             </div>
         </div>
@@ -2356,6 +2525,14 @@
                     <h4 class="insight-title">🎯 Team Adoption & Change Management</h4>
                     <p class="insight-text"><strong>For HR & Training Teams:</strong> Start with pilot programs using tools with gentle learning curves (GitHub Copilot, Trae AI). <strong>For Team Leads:</strong> Provide comprehensive training and establish best practices for AI-assisted development to maximize adoption and effectiveness.</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Last Updated -->
+        <div class="last-updated">
+            <div class="last-updated-content">
+                <span class="last-updated-icon">🕐</span>
+                <span class="last-updated-text">Last updated: January 15, 2025 at 2:30 PM EST</span>
             </div>
         </div>
     </div>
