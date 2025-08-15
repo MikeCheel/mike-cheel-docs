@@ -2625,14 +2625,8 @@
         // Style selector functionality
         styleSelector.addEventListener('change', (e) => {
             const newStyle = e.target.value;
-            console.log('Style changed to:', newStyle); // Debug log
             document.body.setAttribute('data-style', newStyle);
             localStorage.setItem('style', newStyle);
-            
-            // Force a repaint to ensure styles apply
-            document.body.style.display = 'none';
-            document.body.offsetHeight; // Trigger reflow
-            document.body.style.display = '';
         });
 
         function updateToggleIcon(theme) {
