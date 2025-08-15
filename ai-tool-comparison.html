@@ -638,6 +638,27 @@
             color: var(--text-color-dark);
         }
 
+        /* Fix glassmorphism and neumorphism dropdown options */
+        [data-style="glassmorphism"] select option {
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3748;
+        }
+
+        [data-style="glassmorphism"][data-theme="dark"] select option {
+            background: rgba(45, 55, 72, 0.9);
+            color: #e2e8f0;
+        }
+
+        [data-style="neumorphism"] select option {
+            background: #e0e5ec;
+            color: #2d3748;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] select option {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+
         .comparison-section {
             background: var(--card-bg);
             border-radius: 15px;
@@ -927,7 +948,12 @@
         }
 
         [data-style="glassmorphism"] .style-selector,
-        [data-style="glassmorphism"] .theme-toggle,
+        [data-style="glassmorphism"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
         [data-style="glassmorphism"] .category-btn,
         [data-style="glassmorphism"] .pricing-tier,
         [data-style="glassmorphism"] .model-item,
@@ -939,7 +965,11 @@
         }
 
         [data-style="glassmorphism"][data-theme="dark"] .style-selector,
-        [data-style="glassmorphism"][data-theme="dark"] .theme-toggle,
+        [data-style="glassmorphism"][data-theme="dark"] .theme-toggle {
+            background: rgba(30, 41, 59, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
         [data-style="glassmorphism"][data-theme="dark"] .category-btn,
         [data-style="glassmorphism"][data-theme="dark"] .pricing-tier,
         [data-style="glassmorphism"][data-theme="dark"] .model-item,
@@ -982,7 +1012,12 @@
         }
 
         [data-style="neumorphism"] .style-selector,
-        [data-style="neumorphism"] .theme-toggle,
+        [data-style="neumorphism"] .theme-toggle {
+            background: #e0e5ec !important;
+            box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff !important;
+            border: none !important;
+        }
+
         [data-style="neumorphism"] .category-btn,
         [data-style="neumorphism"] .pricing-tier,
         [data-style="neumorphism"] .model-item,
@@ -1000,7 +1035,11 @@
         }
 
         [data-style="neumorphism"][data-theme="dark"] .style-selector,
-        [data-style="neumorphism"][data-theme="dark"] .theme-toggle,
+        [data-style="neumorphism"][data-theme="dark"] .theme-toggle {
+            background: #2d3748 !important;
+            box-shadow: inset 5px 5px 10px #1a202c, inset -5px -5px 10px #404c5a !important;
+        }
+
         [data-style="neumorphism"][data-theme="dark"] .category-btn,
         [data-style="neumorphism"][data-theme="dark"] .pricing-tier,
         [data-style="neumorphism"][data-theme="dark"] .model-item,
@@ -2408,8 +2447,14 @@
         // Style selector functionality
         styleSelector.addEventListener('change', (e) => {
             const newStyle = e.target.value;
+            console.log('Style changed to:', newStyle); // Debug log
             document.body.setAttribute('data-style', newStyle);
             localStorage.setItem('style', newStyle);
+            
+            // Force a repaint to ensure styles apply
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Trigger reflow
+            document.body.style.display = '';
         });
 
         function updateToggleIcon(theme) {
