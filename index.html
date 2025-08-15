@@ -162,6 +162,8 @@
 
         .style-selector:hover {
             border-color: var(--accent-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px var(--shadow);
         }
 
         .style-selector option {
@@ -184,6 +186,8 @@
 
         .theme-toggle:hover {
             border-color: var(--accent-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px var(--shadow);
         }
 
         .theme-toggle-slider {
@@ -222,9 +226,10 @@
         }
 
         .link-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px var(--shadow-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow-hover);
             border-color: var(--accent-color);
+            scale: 1.02;
         }
 
         .link-title {
@@ -246,11 +251,14 @@
         .external-icon {
             font-size: 1rem;
             opacity: 0.6;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            color: var(--accent-color);
         }
 
         .link-item:hover .external-icon {
             opacity: 1;
+            transform: translateX(2px) translateY(-1px);
+            scale: 1.1;
         }
 
         .footer {

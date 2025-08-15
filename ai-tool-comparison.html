@@ -205,8 +205,9 @@
         .category-btn:hover, .category-btn.active {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            scale: 1.05;
         }
 
         .tools-grid {
@@ -232,8 +233,14 @@
         }
 
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--accent-color);
+            scale: 1.02;
+        }
+
+        [data-theme="dark"] .tool-card:hover {
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
 
         .tool-header {
@@ -258,30 +265,85 @@
         .tool-name a {
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         [data-theme="dark"] .tool-name a {
-            color: var(--text-color-dark);
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .tool-name a:hover {
-            color: var(--accent-color);
+            transform: translateY(-1px);
+            filter: brightness(1.2);
+            text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .tool-name a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .tool-name a:hover::after {
+            width: 100%;
         }
 
         .pricing-link {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            color: #667eea;
+            gap: 8px;
+            color: var(--accent-color);
             text-decoration: none;
             font-size: 0.85rem;
-            margin-top: 8px;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background: var(--tier-bg);
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .pricing-link {
+            background: var(--tier-bg-dark);
+        }
+
+        .pricing-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
         .pricing-link:hover {
-            color: #5a67d8;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .pricing-link:hover::before {
+            left: 100%;
         }
 
         .external-link {
@@ -319,11 +381,16 @@
 
         .pricing-title {
             font-weight: 600;
-            color: #2d3748;
+            color: var(--text-color);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .pricing-title {
+            color: var(--text-color-dark);
         }
 
         .pricing-tiers {
@@ -336,25 +403,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
+            padding: 10px 14px;
             background: var(--tier-bg);
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 0.9rem;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
         }
 
         [data-theme="dark"] .pricing-tier {
             background: var(--tier-bg-dark);
         }
 
+        .pricing-tier:hover {
+            background: var(--card-bg);
+            border-color: var(--accent-color);
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        [data-theme="dark"] .pricing-tier:hover {
+            background: var(--card-bg-dark);
+        }
+
         .tier-name {
             font-weight: 600;
-            color: #4a5568;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .tier-name {
+            color: var(--text-muted-dark);
         }
 
         .tier-price {
-            color: #667eea;
+            color: var(--accent-color);
             font-weight: 700;
+            transition: color 0.3s ease;
         }
 
         .features-section {
@@ -372,18 +458,42 @@
             align-items: center;
             gap: 8px;
             font-size: 0.9rem;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .feature-item {
+            color: var(--text-color-dark);
+        }
+
+        .feature-item:hover {
+            background: var(--tier-bg);
+            transform: translateX(2px);
+        }
+
+        [data-theme="dark"] .feature-item:hover {
+            background: var(--tier-bg-dark);
         }
 
         .feature-icon {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 11px;
             color: white;
             font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .feature-yes { background: #48bb78; }
@@ -402,11 +512,26 @@
 
         .security-badge {
             padding: 4px 8px;
-            background: #e6fffa;
-            color: #234e52;
+            background: var(--tier-bg);
+            color: var(--text-color);
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .security-badge {
+            background: var(--tier-bg-dark);
+            color: var(--text-color-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .security-badge:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px var(--shadow);
+            border-color: var(--accent-color);
         }
 
         .models-list {
@@ -416,18 +541,47 @@
         }
 
         .model-item {
-            background: #edf2f7;
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: var(--tier-bg);
+            padding: 6px 10px;
+            border-radius: 8px;
             font-size: 0.85rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+
+        [data-theme="dark"] .model-item {
+            background: var(--tier-bg-dark);
+            color: var(--text-color-dark);
+        }
+
+        .model-item:hover {
+            background: var(--card-bg);
+            border-color: var(--accent-color);
+            transform: translateX(2px);
+            box-shadow: 0 1px 4px var(--shadow);
+        }
+
+        [data-theme="dark"] .model-item:hover {
+            background: var(--card-bg-dark);
         }
 
         .filter-section {
-            background: white;
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .filter-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .filter-grid {
@@ -444,28 +598,60 @@
 
         .filter-label {
             font-weight: 600;
-            color: #2d3748;
+            color: var(--text-color);
             font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .filter-label {
+            color: var(--text-color-dark);
         }
 
         select, input {
             padding: 8px 12px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 0.9rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] select, [data-theme="dark"] input {
+            background: var(--card-bg-dark);
+            color: var(--text-color-dark);
+            border-color: var(--border-color-dark);
         }
 
         select:focus, input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent-color);
+        }
+
+        select option {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] select option {
+            background: var(--card-bg-dark);
+            color: var(--text-color-dark);
         }
 
         .comparison-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
             margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .comparison-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .comparison-table {
@@ -485,18 +671,57 @@
         .comparison-table th, .comparison-table td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             width: 200px;
             white-space: normal;
             word-wrap: break-word;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .comparison-table th, [data-theme="dark"] .comparison-table td {
+            border-bottom: 1px solid var(--border-color-dark);
+            color: var(--text-color-dark);
         }
 
         .comparison-table th {
-            background: #f7fafc;
+            background: var(--tier-bg);
             font-weight: 600;
             position: sticky;
             top: 0;
             z-index: 1;
+        }
+
+        [data-theme="dark"] .comparison-table th {
+            background: var(--tier-bg-dark);
+        }
+
+        .comparison-table a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table a:hover {
+            color: #8b5cf6;
+            transform: translateY(-1px);
+        }
+
+        .comparison-table a::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .comparison-table a:hover::after {
+            width: 100%;
         }
 
         .comparison-table tbody {
@@ -512,23 +737,40 @@
         }
 
         .recommendation-box {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
+            background: var(--card-bg);
+            color: var(--text-color);
             padding: 25px;
             border-radius: 15px;
             margin-top: 30px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .recommendation-box {
+            background: var(--card-bg-dark);
+            color: var(--text-color-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
         }
 
         .recommendation-title {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 15px;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
         }
 
         .use-case {
             margin-bottom: 10px;
             padding-left: 15px;
             position: relative;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .use-case {
+            color: var(--text-color-dark);
         }
 
         .use-case::before {
@@ -536,6 +778,119 @@
             position: absolute;
             left: 0;
             font-weight: bold;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        /* Key Insights Section Styles */
+        .insights-section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .insights-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .insights-title {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .insights-title {
+            color: var(--text-color-dark);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .insight-card {
+            padding: 20px;
+            background: var(--tier-bg);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        [data-theme="dark"] .insight-card {
+            background: var(--tier-bg-dark);
+        }
+
+        .insight-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .insight-title {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .insight-text {
+            color: var(--text-color);
+            transition: color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        [data-theme="dark"] .insight-text {
+            color: var(--text-color-dark);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .back-to-top:active {
+            transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
@@ -554,6 +909,18 @@
             
             .filter-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
             }
         }
     </style>
@@ -576,7 +943,7 @@
         </div>
 
         <div class="filter-section">
-            <h3 style="margin-bottom: 15px; color: #2d3748;">Filter & Search Tools</h3>
+            <h3 style="margin-bottom: 15px; color: var(--text-color); transition: color 0.3s ease;">Filter & Search Tools</h3>
             <div class="filter-grid">
                 <div class="filter-group">
                     <label class="filter-label">Tool Category</label>
@@ -1365,11 +1732,259 @@
                     <div class="model-item">Local models</div>
                 </div>
             </div>
+
+            <!-- Anthropic Claude -->
+            <div class="tool-card" data-category="foundation" data-price="low" data-security="enterprise">
+                <div class="tool-header">
+                    <div>
+                        <div class="tool-name">
+                            <a href="https://www.anthropic.com/" target="_blank" rel="noopener noreferrer">Anthropic Claude</a>
+                        </div>
+                        <div class="tool-type">Foundation Models</div>
+                    </div>
+                </div>
+                <div class="tool-description">
+                    AI safety-focused models with industry-leading context windows (500K+ tokens), constitutional AI training, and excellent reasoning capabilities for complex enterprise workflows.
+                </div>
+                
+                <div class="pricing-section">
+                    <div class="pricing-title">💰 Pricing</div>
+                    <div class="pricing-tiers">
+                        <div class="pricing-tier">
+                            <span class="tier-name">Pro</span>
+                            <span class="tier-price">$20/month</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">Team</span>
+                            <span class="tier-price">$25/user/month</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">API Usage</span>
+                            <span class="tier-price">$3-15/1M tokens</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">Enterprise</span>
+                            <span class="tier-price">Custom pricing</span>
+                        </div>
+                    </div>
+                    <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer" class="pricing-link">
+                        View Pricing Details →
+                    </a>
+                </div>
+
+                <div class="features-section">
+                    <div class="pricing-title">🚀 Key Features</div>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>500K+ context window</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Claude 3.5 Sonnet & Haiku</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Constitutional AI</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Function calling</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Vision capabilities</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Enterprise SSO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-section">
+                    <div class="pricing-title">🔒 Security & Compliance</div>
+                    <div class="security-badges">
+                        <span class="security-badge">SOC 2 Type 2</span>
+                        <span class="security-badge">GDPR Compliant</span>
+                        <span class="security-badge">No Training on Data</span>
+                        <span class="security-badge">Enterprise Ready</span>
+                    </div>
+                </div>
+
+                <div class="models-list">
+                    <div class="model-item">Claude 3.5 Sonnet</div>
+                    <div class="model-item">Claude 3.5 Haiku</div>
+                    <div class="model-item">Claude 3 Opus</div>
+                    <div class="model-item">Computer Use (Beta)</div>
+                </div>
+            </div>
+
+            <!-- AWS Bedrock -->
+            <div class="tool-card" data-category="foundation" data-price="medium" data-security="enterprise">
+                <div class="tool-header">
+                    <div>
+                        <div class="tool-name">
+                            <a href="https://aws.amazon.com/bedrock/" target="_blank" rel="noopener noreferrer">AWS Bedrock</a>
+                        </div>
+                        <div class="tool-type">Multi-Model Platform</div>
+                    </div>
+                </div>
+                <div class="tool-description">
+                    Fully managed service offering 100+ foundation models from leading AI companies including Claude, GPT, Jurassic, and more with enterprise security and AWS integration.
+                </div>
+                
+                <div class="pricing-section">
+                    <div class="pricing-title">💰 Pricing</div>
+                    <div class="pricing-tiers">
+                        <div class="pricing-tier">
+                            <span class="tier-name">On-Demand</span>
+                            <span class="tier-price">Pay per use</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">Provisioned</span>
+                            <span class="tier-price">Reserved capacity</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">Model customization</span>
+                            <span class="tier-price">Variable pricing</span>
+                        </div>
+                    </div>
+                    <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank" rel="noopener noreferrer" class="pricing-link">
+                        View Pricing Details →
+                    </a>
+                </div>
+
+                <div class="features-section">
+                    <div class="pricing-title">🚀 Key Features</div>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>100+ foundation models</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Model fine-tuning</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Knowledge bases</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Agents & workflows</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Guardrails</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>AWS integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-section">
+                    <div class="pricing-title">🔒 Security & Compliance</div>
+                    <div class="security-badges">
+                        <span class="security-badge">FedRAMP High</span>
+                        <span class="security-badge">HIPAA Eligible</span>
+                        <span class="security-badge">AWS Security</span>
+                        <span class="security-badge">Data Residency</span>
+                    </div>
+                </div>
+
+                <div class="models-list">
+                    <div class="model-item">Claude 3.5 Sonnet</div>
+                    <div class="model-item">GPT-4o models</div>
+                    <div class="model-item">Llama 3.1 & 3.2</div>
+                    <div class="model-item">Titan & Jurassic</div>
+                </div>
+            </div>
+
+            <!-- AWS Kiro -->
+            <div class="tool-card" data-category="development" data-price="free" data-security="enterprise">
+                <div class="tool-header">
+                    <div>
+                        <div class="tool-name">
+                            <a href="https://kiro.dev/" target="_blank" rel="noopener noreferrer">AWS Kiro</a>
+                        </div>
+                        <div class="tool-type">AI Development Environment</div>
+                    </div>
+                </div>
+                <div class="tool-description">
+                    AWS's experimental AI-first IDE with spec-driven development, multi-file context understanding, and seamless AWS service integration for modern application development.
+                </div>
+                
+                <div class="pricing-section">
+                    <div class="pricing-title">💰 Pricing</div>
+                    <div class="pricing-tiers">
+                        <div class="pricing-tier">
+                            <span class="tier-name">Preview</span>
+                            <span class="tier-price">Free (during preview)</span>
+                        </div>
+                        <div class="pricing-tier">
+                            <span class="tier-name">Future pricing</span>
+                            <span class="tier-price">TBD</span>
+                        </div>
+                    </div>
+                    <a href="https://kiro.dev/" target="_blank" rel="noopener noreferrer" class="pricing-link">
+                        Join Preview →
+                    </a>
+                </div>
+
+                <div class="features-section">
+                    <div class="pricing-title">🚀 Key Features</div>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Spec-driven development</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Multi-file context</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>AWS service integration</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Cloud-native development</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-partial">○</div>
+                            <span>Preview limitations</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon feature-yes">✓</div>
+                            <span>Real-time collaboration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-section">
+                    <div class="pricing-title">🔒 Security & Compliance</div>
+                    <div class="security-badges">
+                        <span class="security-badge">AWS Security</span>
+                        <span class="security-badge">IAM Integration</span>
+                        <span class="security-badge">VPC Support</span>
+                        <span class="security-badge">Enterprise Ready</span>
+                    </div>
+                </div>
+
+                <div class="models-list">
+                    <div class="model-item">Bedrock models</div>
+                    <div class="model-item">Claude 3.5 Sonnet</div>
+                    <div class="model-item">AWS-optimized models</div>
+                </div>
+            </div>
         </div>
 
         <!-- Quick Comparison Table -->
         <div class="comparison-section">
-            <h2 style="text-align: center; margin-bottom: 25px; color: #2d3748;">Quick Feature Comparison</h2>
+            <h2 style="text-align: center; margin-bottom: 25px; color: var(--text-color); transition: color 0.3s ease;">Quick Feature Comparison</h2>
             <div style="overflow-x: auto;">
                 <table class="comparison-table">
                     <thead>
@@ -1494,60 +2109,83 @@
 
         <!-- Recommendations -->
         <div class="recommendation-box">
-            <div class="recommendation-title">🎯 Recommendations by Use Case</div>
+            <div class="recommendation-title">🎯 Recommendations by Company Role & Use Case</div>
             
             <div class="use-case">
-                <strong>For Enterprise Foundation Models:</strong> AWS Bedrock for multi-model access, OpenAI API for cutting-edge capabilities, or Anthropic Claude for safety-critical applications
+                <strong>For CTOs & Engineering Leadership:</strong> AWS Bedrock for enterprise scalability, Anthropic Claude for safety compliance, or OpenAI Enterprise for cutting-edge capabilities with vendor support
             </div>
             
             <div class="use-case">
-                <strong>For Development Teams:</strong> Cursor for AI-first workflows, Windsurf for agentic development, or GitHub Copilot for existing GitHub workflows
+                <strong>For Development Team Leads:</strong> Cursor for team productivity workflows, GitHub Copilot for seamless Git integration, or Windsurf for advanced agentic development patterns
             </div>
             
             <div class="use-case">
-                <strong>For Individual Developers:</strong> Cline for maximum control and transparency, or Kilo Code for enhanced open-source features
+                <strong>For Individual Senior Engineers:</strong> Cline for maximum control and transparency, Kilo Code for extensive model access, or AWS Kiro for cloud-native development
             </div>
             
             <div class="use-case">
-                <strong>For Cost-Conscious Teams:</strong> Galaxy.ai for multiple AI needs, Trae AI for free premium access, or open-source solutions like Cline
+                <strong>For DevOps & Platform Engineers:</strong> Warp Terminal for infrastructure automation, AWS Bedrock for scalable model deployment, or open-source solutions for custom integrations
             </div>
             
             <div class="use-case">
-                <strong>For Terminal-Heavy Workflows:</strong> Warp Terminal for AI-enhanced command line experience with collaboration features
+                <strong>For Security & Compliance Teams:</strong> Anthropic Claude for safety guarantees, AWS Bedrock for regulatory compliance, or open-source solutions like Cline for audit transparency
             </div>
             
             <div class="use-case">
-                <strong>For Experimental/Startup Projects:</strong> AWS Kiro for spec-driven development, or free tiers of Cursor/Windsurf for rapid prototyping
+                <strong>For Budget-Conscious Startups:</strong> Trae AI for free premium model access, Galaxy.ai for multiple AI needs, or Cline + Kilo Code for open-source flexibility
+            </div>
+            
+            <div class="use-case">
+                <strong>For Product Teams & Prototyping:</strong> AWS Kiro for spec-driven development, Trae AI for rapid experimentation, or Cursor for design-to-code workflows
+            </div>
+            
+            <div class="use-case">
+                <strong>For Enterprise Architecture Teams:</strong> AWS Bedrock for multi-cloud strategies, Anthropic Claude for safety-critical systems, or GitHub Copilot for organizational coding standards
             </div>
         </div>
 
         <!-- Additional Insights -->
-        <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h3 style="color: #2d3748; margin-bottom: 20px;">💡 Key Insights for Software Companies</h3>
+        <div class="insights-section">
+            <h3 class="insights-title">💡 Key Insights for Software Companies</h3>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div style="padding: 20px; background: #f7fafc; border-radius: 10px;">
-                    <h4 style="color: #667eea; margin-bottom: 10px;">Security Considerations</h4>
-                    <p>Enterprise-grade security features like SOC 2 Type 2, HIPAA compliance, and zero data retention are becoming standard. Open-source solutions like Cline offer maximum transparency and control.</p>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4 class="insight-title">🔒 Security & Compliance Strategy</h4>
+                    <p class="insight-text"><strong>For CTOs:</strong> Prioritize SOC 2 Type 2, HIPAA, and FedRAMP compliance. AWS Bedrock offers government-grade security, while Anthropic Claude provides constitutional AI safety. <strong>For Security Teams:</strong> Open-source solutions like Cline provide audit transparency and on-premises deployment options.</p>
                 </div>
                 
-                <div style="padding: 20px; background: #f7fafc; border-radius: 10px;">
-                    <h4 style="color: #667eea; margin-bottom: 10px;">Cost Optimization</h4>
-                    <p>Many tools offer free tiers or open-source alternatives. Pay-per-use models for foundation models can be more cost-effective than subscriptions for variable workloads.</p>
+                <div class="insight-card">
+                    <h4 class="insight-title">💰 Financial Planning & ROI</h4>
+                    <p class="insight-text"><strong>For Finance Teams:</strong> Pay-per-use models (AWS Bedrock, OpenAI API) offer better cost predictability than seat-based pricing for variable workloads. <strong>For Startups:</strong> Free tiers can provide 6-12 months of development runway. Consider total cost of ownership including training and integration time.</p>
                 </div>
                 
-                <div style="padding: 20px; background: #f7fafc; border-radius: 10px;">
-                    <h4 style="color: #667eea; margin-bottom: 10px;">Integration Strategy</h4>
-                    <p>Consider existing workflows: GitHub Copilot for GitHub-heavy teams, AWS tools for AWS environments, or platform-agnostic solutions like Cline for flexibility.</p>
+                <div class="insight-card">
+                    <h4 class="insight-title">🔄 Integration & Workflow Strategy</h4>
+                    <p class="insight-text"><strong>For Engineering Managers:</strong> Match tools to existing workflows - GitHub Copilot for Git-heavy teams, Warp Terminal for DevOps, AWS Kiro for cloud-native development. <strong>For Platform Teams:</strong> Prioritize tools with robust APIs and SSO integration for enterprise adoption.</p>
                 </div>
                 
-                <div style="padding: 20px; background: #f7fafc; border-radius: 10px;">
-                    <h4 style="color: #667eea; margin-bottom: 10px;">Future-Proofing</h4>
-                    <p>Open-source and multi-model solutions provide better protection against vendor lock-in. Tools with MCP support enable extensibility as AI capabilities evolve.</p>
+                <div class="insight-card">
+                    <h4 class="insight-title">🔮 Future-Proofing & Technology Strategy</h4>
+                    <p class="insight-text"><strong>For Enterprise Architects:</strong> Multi-model platforms (AWS Bedrock) and MCP-compatible tools reduce vendor lock-in. <strong>For Tech Leaders:</strong> Open-source solutions provide strategic flexibility as AI capabilities rapidly evolve. Consider tools that support both proprietary and open-source models.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 class="insight-title">📊 Performance & Productivity Metrics</h4>
+                    <p class="insight-text"><strong>For Engineering Leaders:</strong> Track code generation speed, bug reduction rates, and developer satisfaction scores. Tools like Cursor and Windsurf offer detailed analytics. <strong>For Product Teams:</strong> Measure time-to-prototype and feature delivery velocity to quantify AI tooling ROI.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 class="insight-title">🎯 Team Adoption & Change Management</h4>
+                    <p class="insight-text"><strong>For HR & Training Teams:</strong> Start with pilot programs using tools with gentle learning curves (GitHub Copilot, Trae AI). <strong>For Team Leads:</strong> Provide comprehensive training and establish best practices for AI-assisted development to maximize adoption and effectiveness.</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        ↑
+    </button>
 
     <script>
         // Filter and search functionality
@@ -1640,6 +2278,26 @@
             // Show moon when dark mode (click to go to light)
             slider.textContent = theme === 'light' ? '☀️' : '🌙';
         }
+
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('backToTop');
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll to top when button is clicked
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
         // Add smooth transitions when styles change
         document.addEventListener('DOMContentLoaded', () => {
