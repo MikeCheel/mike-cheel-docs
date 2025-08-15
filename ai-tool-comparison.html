@@ -893,6 +893,129 @@
             transform: translateY(-1px);
         }
 
+        /* Glassmorphism Style */
+        [data-style="glassmorphism"] body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-style="glassmorphism"][data-theme="dark"] body {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        }
+
+        [data-style="glassmorphism"] .container,
+        [data-style="glassmorphism"] .header,
+        [data-style="glassmorphism"] .filter-section,
+        [data-style="glassmorphism"] .tool-card,
+        [data-style="glassmorphism"] .comparison-section,
+        [data-style="glassmorphism"] .recommendation-box,
+        [data-style="glassmorphism"] .insights-section {
+            background: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37) !important;
+        }
+
+        [data-style="glassmorphism"][data-theme="dark"] .container,
+        [data-style="glassmorphism"][data-theme="dark"] .header,
+        [data-style="glassmorphism"][data-theme="dark"] .filter-section,
+        [data-style="glassmorphism"][data-theme="dark"] .tool-card,
+        [data-style="glassmorphism"][data-theme="dark"] .comparison-section,
+        [data-style="glassmorphism"][data-theme="dark"] .recommendation-box,
+        [data-style="glassmorphism"][data-theme="dark"] .insights-section {
+            background: rgba(45, 55, 72, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-style="glassmorphism"] .style-selector,
+        [data-style="glassmorphism"] .theme-toggle,
+        [data-style="glassmorphism"] .category-btn,
+        [data-style="glassmorphism"] .pricing-tier,
+        [data-style="glassmorphism"] .model-item,
+        [data-style="glassmorphism"] .security-badge,
+        [data-style="glassmorphism"] .insight-card {
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        [data-style="glassmorphism"][data-theme="dark"] .style-selector,
+        [data-style="glassmorphism"][data-theme="dark"] .theme-toggle,
+        [data-style="glassmorphism"][data-theme="dark"] .category-btn,
+        [data-style="glassmorphism"][data-theme="dark"] .pricing-tier,
+        [data-style="glassmorphism"][data-theme="dark"] .model-item,
+        [data-style="glassmorphism"][data-theme="dark"] .security-badge,
+        [data-style="glassmorphism"][data-theme="dark"] .insight-card {
+            background: rgba(30, 41, 59, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* Neumorphism Style */
+        [data-style="neumorphism"] body {
+            background: #e0e5ec;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] body {
+            background: #2d3748;
+        }
+
+        [data-style="neumorphism"] .container,
+        [data-style="neumorphism"] .header,
+        [data-style="neumorphism"] .filter-section,
+        [data-style="neumorphism"] .tool-card,
+        [data-style="neumorphism"] .comparison-section,
+        [data-style="neumorphism"] .recommendation-box,
+        [data-style="neumorphism"] .insights-section {
+            background: #e0e5ec !important;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff !important;
+            border: none !important;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] .container,
+        [data-style="neumorphism"][data-theme="dark"] .header,
+        [data-style="neumorphism"][data-theme="dark"] .filter-section,
+        [data-style="neumorphism"][data-theme="dark"] .tool-card,
+        [data-style="neumorphism"][data-theme="dark"] .comparison-section,
+        [data-style="neumorphism"][data-theme="dark"] .recommendation-box,
+        [data-style="neumorphism"][data-theme="dark"] .insights-section {
+            background: #2d3748 !important;
+            box-shadow: 20px 20px 60px #1a202c, -20px -20px 60px #404c5a !important;
+        }
+
+        [data-style="neumorphism"] .style-selector,
+        [data-style="neumorphism"] .theme-toggle,
+        [data-style="neumorphism"] .category-btn,
+        [data-style="neumorphism"] .pricing-tier,
+        [data-style="neumorphism"] .model-item,
+        [data-style="neumorphism"] .security-badge,
+        [data-style="neumorphism"] .insight-card {
+            background: #e0e5ec !important;
+            box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff !important;
+            border: none !important;
+        }
+
+        [data-style="neumorphism"] .tool-card:hover,
+        [data-style="neumorphism"] .category-btn:hover,
+        [data-style="neumorphism"] .pricing-tier:hover {
+            box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff !important;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] .style-selector,
+        [data-style="neumorphism"][data-theme="dark"] .theme-toggle,
+        [data-style="neumorphism"][data-theme="dark"] .category-btn,
+        [data-style="neumorphism"][data-theme="dark"] .pricing-tier,
+        [data-style="neumorphism"][data-theme="dark"] .model-item,
+        [data-style="neumorphism"][data-theme="dark"] .security-badge,
+        [data-style="neumorphism"][data-theme="dark"] .insight-card {
+            background: #2d3748 !important;
+            box-shadow: inset 5px 5px 10px #1a202c, inset -5px -5px 10px #404c5a !important;
+        }
+
+        [data-style="neumorphism"][data-theme="dark"] .tool-card:hover,
+        [data-style="neumorphism"][data-theme="dark"] .category-btn:hover,
+        [data-style="neumorphism"][data-theme="dark"] .pricing-tier:hover {
+            box-shadow: 5px 5px 10px #1a202c, -5px -5px 10px #404c5a !important;
+        }
+
         @media (max-width: 768px) {
             .tools-grid {
                 grid-template-columns: 1fr;
@@ -921,6 +1044,22 @@
                 width: 45px;
                 height: 45px;
                 font-size: 18px;
+            }
+
+            /* Mobile optimizations for alternative styles */
+            [data-style="glassmorphism"] .container,
+            [data-style="glassmorphism"] .tool-card {
+                backdrop-filter: blur(10px);
+            }
+
+            [data-style="neumorphism"] .container,
+            [data-style="neumorphism"] .tool-card {
+                box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff !important;
+            }
+
+            [data-style="neumorphism"][data-theme="dark"] .container,
+            [data-style="neumorphism"][data-theme="dark"] .tool-card {
+                box-shadow: 10px 10px 30px #1a202c, -10px -10px 30px #404c5a !important;
             }
         }
     </style>
