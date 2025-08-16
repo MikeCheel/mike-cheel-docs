@@ -7,25 +7,22 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
         :root {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --card-bg: #f8fafc;
-            --card-border: #e2e8f0;
-            --accent-color: #4f46e5;
-            --accent-hover: #4338ca;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.15);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --text-color: #e2e8f0;
-            --card-bg: #1e293b;
-            --card-border: #334155;
-            --accent-color: #6366f1;
-            --accent-hover: #8b5cf6;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --shadow-hover: rgba(0, 0, 0, 0.4);
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-gradient-dark: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            --card-bg: #ffffff;
+            --card-bg-dark: #2d3748;
+            --text-color: #2d3748;
+            --text-color-dark: #e2e8f0;
+            --text-muted: #666666;
+            --text-muted-dark: #a0aec0;
+            --accent-color: #667eea;
+            --accent-hover: #5a67d8;
+            --border-color: #e2e8f0;
+            --border-color-dark: #4a5568;
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+            --tier-bg: #f7fafc;
+            --tier-bg-dark: #4a5568;
         }
 
         * {
@@ -35,13 +32,18 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-gradient);
             color: var(--text-color);
-            background-color: var(--bg-color);
+            line-height: 1.6;
             min-height: 100vh;
             padding: 2rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: var(--bg-gradient-dark);
+            color: var(--text-color-dark);
         }
 
         /* Glassmorphism Style */
@@ -50,15 +52,15 @@
         }
 
         [data-style="glassmorphism"] .container {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37) !important;
         }
 
         [data-style="glassmorphism"][data-theme="dark"] .container {
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(45, 55, 72, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
 
         [data-style="glassmorphism"] .link-item {
@@ -83,14 +85,14 @@
         }
 
         [data-style="neumorphism"] .container {
-            background: #e0e5ec;
-            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-            border-radius: 20px;
+            background: #e0e5ec !important;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff !important;
+            border: none !important;
         }
 
         [data-style="neumorphism"][data-theme="dark"] .container {
-            background: #2d3748;
-            box-shadow: 20px 20px 60px #1a202c, -20px -20px 60px #404c5a;
+            background: #2d3748 !important;
+            box-shadow: 20px 20px 60px #1a202c, -20px -20px 60px #404c5a !important;
         }
 
         [data-style="neumorphism"] .link-item {
@@ -118,8 +120,17 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .container {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
         }
 
         .header {
@@ -137,7 +148,11 @@
 
         .header p {
             font-size: 1.1rem;
-            opacity: 0.8;
+            color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .header p {
+            color: var(--text-muted-dark);
         }
 
         .controls {
@@ -151,7 +166,7 @@
 
         .style-selector {
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             padding: 0.5rem;
             color: var(--text-color);
@@ -162,8 +177,6 @@
 
         .style-selector:hover {
             border-color: var(--accent-color);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px var(--shadow);
         }
 
         .style-selector option {
@@ -171,9 +184,20 @@
             color: var(--text-color);
         }
 
+        [data-theme="dark"] .style-selector {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        [data-theme="dark"] .style-selector option {
+            background: var(--card-bg-dark);
+            color: var(--text-color-dark);
+        }
+
         .theme-toggle {
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
+            border: 2px solid var(--border-color);
             border-radius: 50px;
             width: 60px;
             height: 30px;
@@ -186,8 +210,11 @@
 
         .theme-toggle:hover {
             border-color: var(--accent-color);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
         }
 
         .theme-toggle-slider {
@@ -215,21 +242,31 @@
 
         .link-item {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: block;
-            box-shadow: 0 2px 4px var(--shadow);
+            box-shadow: 0 4px 15px var(--shadow);
         }
 
         .link-item:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow-hover);
+            box-shadow: 0 12px 30px var(--shadow);
             border-color: var(--accent-color);
             scale: 1.02;
+        }
+
+        [data-theme="dark"] .link-item {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+        }
+
+        [data-theme="dark"] .link-item:hover {
+            box-shadow: 0 12px 30px var(--shadow-dark);
         }
 
         .link-title {
@@ -243,9 +280,12 @@
         }
 
         .link-description {
-            color: var(--text-color);
-            opacity: 0.8;
+            color: var(--text-muted);
             font-size: 1rem;
+        }
+
+        [data-theme="dark"] .link-description {
+            color: var(--text-muted-dark);
         }
 
         .external-icon {
@@ -264,8 +304,12 @@
         .footer {
             margin-top: 4rem;
             text-align: center;
-            opacity: 0.6;
+            color: var(--text-muted);
             font-size: 0.9rem;
+        }
+
+        [data-theme="dark"] .footer {
+            color: var(--text-muted-dark);
         }
 
         @media (max-width: 768px) {
@@ -346,7 +390,7 @@
                     <span class="external-icon">↗</span>
                 </div>
                 <div class="link-description">
-                    Comprehensive comparison of AI platforms, development tools, coding assistants, and IDEs for software companies. Evaluate pricing, features, security, and available models to make informed technology decisions.
+                    Comprehensive comparison of 20+ AI platforms, coding assistants, and development tools with advanced filtering by category, price, security level, and key features. Includes detailed analysis of foundation models, MCP server ecosystem, market landscape overview, enterprise insights, and strategic recommendations for CTOs and engineering teams.
                 </div>
             </a>
 
