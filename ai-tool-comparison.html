@@ -1538,16 +1538,23 @@
                 left: -9999px;
             }
             
+            .comparison-table {
+                max-width: 100%;
+                width: 100%;
+            }
+            
             .comparison-table tr {
                 background: var(--card-bg);
                 border: 1px solid var(--border-color);
-                border-radius: 20px;
-                margin-bottom: 25px;
+                border-radius: 16px;
+                margin: 0 auto 20px auto;
                 padding: 0;
-                box-shadow: 0 10px 30px var(--shadow);
+                box-shadow: 0 8px 25px var(--shadow);
                 transition: all 0.3s ease;
                 position: relative;
                 overflow: hidden;
+                max-width: 100%;
+                width: 100%;
             }
             
             [data-theme="dark"] .comparison-table tr {
@@ -1572,10 +1579,10 @@
                 background: linear-gradient(135deg, var(--accent-color) 0%, #8b5cf6 100%);
                 color: white;
                 font-weight: 700;
-                font-size: 1.2rem;
-                padding: 20px 25px;
+                font-size: 1.1rem;
+                padding: 16px 20px;
                 margin: 0;
-                border-radius: 20px 20px 0 0;
+                border-radius: 16px 16px 0 0;
                 text-align: center;
                 position: relative;
             }
@@ -1611,10 +1618,10 @@
             .comparison-table td:not(:first-child) {
                 border: none;
                 position: relative;
-                padding: 15px 25px;
+                padding: 12px 20px;
                 text-align: left;
                 white-space: normal;
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1630,7 +1637,7 @@
             
             .comparison-table td:last-child {
                 border-bottom: none;
-                border-radius: 0 0 20px 20px;
+                border-radius: 0 0 16px 16px;
             }
             
             .comparison-table td:not(:first-child):hover {
@@ -1647,9 +1654,9 @@
                 content: attr(data-label);
                 font-weight: 600;
                 color: var(--accent-color);
-                font-size: 0.85rem;
-                margin-right: 15px;
-                min-width: 120px;
+                font-size: 0.75rem;
+                margin-right: 12px;
+                min-width: 100px;
                 flex-shrink: 0;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
@@ -1694,15 +1701,61 @@
             
             /* Mobile table header spacing */
             .table-header {
-                margin-bottom: 30px;
+                margin-bottom: 25px;
+                padding: 0 10px;
             }
             
             .table-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
             
             .table-subtitle {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Mobile container padding */
+            .comparison-section {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .comparison-table tr {
+                margin: 0 auto 15px auto;
+                border-radius: 12px;
+            }
+            
+            .comparison-table td:first-child {
+                padding: 14px 16px;
+                font-size: 1rem;
+                border-radius: 12px 12px 0 0;
+            }
+            
+            .comparison-table td:not(:first-child) {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .comparison-table td:last-child {
+                border-radius: 0 0 12px 12px;
+            }
+            
+            .comparison-table td:not(:first-child):before {
+                font-size: 0.7rem;
+                min-width: 90px;
+                margin-right: 10px;
+            }
+            
+            .table-header {
+                padding: 0 5px;
+            }
+            
+            .table-title {
+                font-size: 1.3rem;
+            }
+            
+            .comparison-section {
+                padding: 0 10px;
             }
         }
 
