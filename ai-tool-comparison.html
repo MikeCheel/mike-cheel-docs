@@ -1521,7 +1521,7 @@
             font-weight: bold;
         }
 
-        /* Mobile Card Layout */
+        /* Beautiful Mobile Card Layout */
         @media (max-width: 768px) {
             .comparison-table,
             .comparison-table thead,
@@ -1541,70 +1541,168 @@
             .comparison-table tr {
                 background: var(--card-bg);
                 border: 1px solid var(--border-color);
-                border-radius: 12px;
-                margin-bottom: 15px;
-                padding: 15px;
-                box-shadow: 0 4px 15px var(--shadow);
+                border-radius: 20px;
+                margin-bottom: 25px;
+                padding: 0;
+                box-shadow: 0 10px 30px var(--shadow);
                 transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
             }
             
             [data-theme="dark"] .comparison-table tr {
                 background: var(--card-bg-dark);
                 border-color: var(--border-color-dark);
-                box-shadow: 0 4px 15px var(--shadow-dark);
+                box-shadow: 0 10px 30px var(--shadow-dark);
             }
             
             .comparison-table tr:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px var(--shadow);
+                transform: translateY(-6px);
+                box-shadow: 0 20px 40px var(--shadow);
+                border-color: var(--accent-color);
+                scale: 1.02;
             }
             
             [data-theme="dark"] .comparison-table tr:hover {
-                box-shadow: 0 8px 25px var(--shadow-dark);
+                box-shadow: 0 20px 40px var(--shadow-dark);
             }
             
-            .comparison-table td {
-                border: none;
-                position: relative;
-                padding: 8px 0 8px 40%;
-                text-align: left;
-                white-space: normal;
-                font-size: 0.9rem;
-            }
-            
-            .comparison-table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                width: 35%;
-                padding-right: 10px;
-                white-space: nowrap;
-                font-weight: 600;
-                color: var(--accent-color);
-                font-size: 0.8rem;
-            }
-            
+            /* Card Header with Tool Name */
             .comparison-table td:first-child {
+                background: linear-gradient(135deg, var(--accent-color) 0%, #8b5cf6 100%);
+                color: white;
                 font-weight: 700;
-                font-size: 1.1rem;
-                padding-left: 0;
-                margin-bottom: 8px;
-                color: var(--accent-color);
+                font-size: 1.2rem;
+                padding: 20px 25px;
+                margin: 0;
+                border-radius: 20px 20px 0 0;
+                text-align: center;
+                position: relative;
             }
             
             .comparison-table td:first-child:before {
                 display: none;
             }
             
+            .comparison-table td:first-child a {
+                color: white;
+                text-decoration: none;
+                font-weight: 700;
+            }
+            
+            .comparison-table td:first-child a:hover {
+                color: rgba(255, 255, 255, 0.9);
+                transform: none;
+            }
+            
+            /* Card Content Area */
+            .comparison-table tr::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--accent-color) 0%, #8b5cf6 100%);
+                z-index: 1;
+            }
+            
+            /* Card Body */
+            .comparison-table td:not(:first-child) {
+                border: none;
+                position: relative;
+                padding: 15px 25px;
+                text-align: left;
+                white-space: normal;
+                font-size: 0.95rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+                background: var(--tier-bg);
+                transition: all 0.3s ease;
+            }
+            
+            [data-theme="dark"] .comparison-table td:not(:first-child) {
+                background: var(--tier-bg-dark);
+                border-bottom-color: rgba(99, 102, 241, 0.2);
+            }
+            
+            .comparison-table td:last-child {
+                border-bottom: none;
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .comparison-table td:not(:first-child):hover {
+                background: rgba(99, 102, 241, 0.05);
+                transform: translateX(5px);
+            }
+            
+            [data-theme="dark"] .comparison-table td:not(:first-child):hover {
+                background: rgba(99, 102, 241, 0.1);
+            }
+            
+            /* Card Labels */
+            .comparison-table td:not(:first-child):before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--accent-color);
+                font-size: 0.85rem;
+                margin-right: 15px;
+                min-width: 120px;
+                flex-shrink: 0;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            /* Card Values */
+            .comparison-table td:not(:first-child) {
+                color: var(--text-color);
+                font-weight: 500;
+            }
+            
+            [data-theme="dark"] .comparison-table td:not(:first-child) {
+                color: var(--text-color-dark);
+            }
+            
+            /* Special styling for checkmarks and crosses */
+            .comparison-table td:contains("✅") {
+                color: #48bb78;
+                font-weight: 600;
+            }
+            
+            .comparison-table td:contains("❌") {
+                color: #f56565;
+                font-weight: 600;
+            }
+            
+            /* Mobile filter controls */
             .table-filters {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
+                align-items: center;
             }
             
             .table-filter {
                 min-width: auto;
                 width: 100%;
-                max-width: 280px;
+                max-width: 300px;
+                padding: 12px 16px;
+                border-radius: 12px;
+                font-size: 1rem;
+            }
+            
+            /* Mobile table header spacing */
+            .table-header {
+                margin-bottom: 30px;
+            }
+            
+            .table-title {
+                font-size: 1.6rem;
+            }
+            
+            .table-subtitle {
+                font-size: 0.95rem;
             }
         }
 
