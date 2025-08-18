@@ -52,6 +52,8 @@
             position: relative;
         }
 
+        /* Remove all my width changes to start fresh */
+
         .container > * {
             max-width: 100%;
             box-sizing: border-box;
@@ -420,17 +422,30 @@
         }
 
         .pricing-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
             margin-bottom: 20px;
+            box-shadow: 0 6px 20px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .pricing-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .pricing-title {
             font-weight: 600;
             color: var(--text-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: color 0.3s ease;
+            font-size: 1.1rem;
         }
 
         [data-theme="dark"] .pricing-title {
@@ -488,7 +503,19 @@
         }
 
         .features-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
             margin-bottom: 20px;
+            box-shadow: 0 6px 20px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .features-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .features-grid {
@@ -580,7 +607,19 @@
         }
 
         .security-section {
-            margin-bottom: 15px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .security-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .security-badges {
@@ -667,12 +706,32 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
+            pointer-events: auto !important;
+            z-index: 999 !important;
+            position: relative !important;
         }
 
         .filter-group {
             display: flex;
             flex-direction: column;
             gap: 5px;
+            pointer-events: auto !important;
+            z-index: 1000 !important;
+            position: relative !important;
+        }
+
+        /* Search highlighting */
+        mark {
+            background-color: #ffff00 !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            padding: 1px 2px !important;
+            border-radius: 2px !important;
+        }
+
+        [data-theme="dark"] mark {
+            background-color: #ffd700 !important;
+            color: #1a1a1a !important;
         }
 
         .filter-label {
@@ -694,6 +753,10 @@
             background: var(--card-bg);
             color: var(--text-color);
             transition: all 0.3s ease;
+            pointer-events: auto !important;
+            z-index: 1000 !important;
+            position: relative !important;
+            cursor: pointer !important;
         }
 
         [data-theme="dark"] select, [data-theme="dark"] input {
@@ -2221,7 +2284,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .table-subtitle {
@@ -2614,9 +2676,9 @@
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
-            max-width: 100%;
-            width: 100%;
-            box-sizing: border-box;
+            width: 1405px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         [data-theme="dark"] .insights-section {
@@ -2629,8 +2691,9 @@
             color: var(--text-color);
             margin-bottom: 20px;
             transition: color 0.3s ease;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
+            text-align: center;
         }
 
         [data-theme="dark"] .insights-title {
@@ -2787,6 +2850,7 @@
         [data-style="glassmorphism"] .category-btn,
         [data-style="glassmorphism"] .pricing-tier,
         [data-style="glassmorphism"] .model-item,
+        [data-style="glassmorphism"] .model-card,
         [data-style="glassmorphism"] .security-badge,
         [data-style="glassmorphism"] .insight-card,
         [data-style="glassmorphism"] .explanation-card {
@@ -2808,6 +2872,7 @@
         [data-style="glassmorphism"][data-theme="dark"] .category-btn,
         [data-style="glassmorphism"][data-theme="dark"] .pricing-tier,
         [data-style="glassmorphism"][data-theme="dark"] .model-item,
+        [data-style="glassmorphism"][data-theme="dark"] .model-card,
         [data-style="glassmorphism"][data-theme="dark"] .security-badge,
         [data-style="glassmorphism"][data-theme="dark"] .insight-card,
         [data-style="glassmorphism"][data-theme="dark"] .explanation-card {
@@ -2865,6 +2930,7 @@
         [data-style="neumorphism"] .category-btn,
         [data-style="neumorphism"] .pricing-tier,
         [data-style="neumorphism"] .model-item,
+        [data-style="neumorphism"] .model-card,
         [data-style="neumorphism"] .security-badge,
         [data-style="neumorphism"] .insight-card,
         [data-style="neumorphism"] .explanation-card {
@@ -2888,6 +2954,7 @@
         [data-style="neumorphism"][data-theme="dark"] .category-btn,
         [data-style="neumorphism"][data-theme="dark"] .pricing-tier,
         [data-style="neumorphism"][data-theme="dark"] .model-item,
+        [data-style="neumorphism"][data-theme="dark"] .model-card,
         [data-style="neumorphism"][data-theme="dark"] .security-badge,
         [data-style="neumorphism"][data-theme="dark"] .insight-card,
         [data-style="neumorphism"][data-theme="dark"] .explanation-card {
@@ -3077,69 +3144,10 @@
             </div>
         </div>
 
-        <div class="filter-section">
-            <h3 style="margin-bottom: 15px; color: var(--text-color); transition: color 0.3s ease;">Filter & Search Tools</h3>
-            <div class="filter-grid">
-                <div class="filter-group">
-                    <label class="filter-label">Tool Category</label>
-                    <select id="categoryFilter">
-                        <option value="all">All Categories</option>
-                        <option value="foundation">Foundation Models</option>
-                        <option value="development">Development Tools</option>
-                        <option value="coding">Coding Assistants</option>
-                        <option value="platform">All-in-One Platforms</option>
-                        <option value="terminal">Terminal Tools</option>
-                        <option value="nocode">No-Code Platforms</option>
-                        <option value="frontend">UI/Frontend Tools</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Price Range</label>
-                    <select id="priceFilter">
-                        <option value="all">All Prices</option>
-                        <option value="free">Free/Freemium</option>
-                        <option value="low">Under $20/month</option>
-                        <option value="medium">$20-$100/month</option>
-                        <option value="high">$100+/month</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Security Level</label>
-                    <select id="securityFilter">
-                        <option value="all">All Security Levels</option>
-                        <option value="enterprise">Enterprise Grade</option>
-                        <option value="business">Business Grade</option>
-                        <option value="basic">Basic</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Key Feature</label>
-                    <select id="featureFilter">
-                        <option value="all">All Features</option>
-                        <option value="ai-first-design">AI-First Design</option>
-                        <option value="enterprise-security">Enterprise Security</option>
-                        <option value="open-source">Open Source</option>
-                        <option value="real-time-collaboration">Real-Time Collaboration</option>
-                        <option value="multi-model">Multi-Model Access</option>
-                        <option value="code-generation">Code Generation</option>
-                        <option value="visual-design">Visual Design</option>
-                        <option value="privacy-first">Privacy-First</option>
-                        <option value="cloud-integration">Cloud Integration</option>
-                        <option value="terminal-ai">Terminal AI</option>
-                        <option value="no-code">No-Code</option>
-                        <option value="real-time-data">Real-Time Data</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Search Tools</label>
-                    <input type="text" id="searchInput" placeholder="Search by name or feature...">
-                </div>
-            </div>
-        </div>
 
         <!-- Category Explanations -->
-        <div class="category-explanations">
-            <h3 class="explanations-title">🧠 Understanding AI Tool Categories</h3>
+        <div class="insights-section">
+            <h3 class="insights-title">🧠 Understanding AI Tool Categories</h3>
             <div class="explanations-grid">
                 <div class="explanation-card">
                     <h4 class="explanation-title">🏗️ Foundation Models</h4>
@@ -3163,7 +3171,6 @@
                 </div>
             </div>
         </div>
-        </div>
 
         <!-- AI Models Comprehensive Analysis -->
         <div class="insights-section">
@@ -3175,7 +3182,7 @@
                 <div class="models-filter-grid">
                     <div class="models-filter-group">
                         <label class="models-filter-label">Model Provider</label>
-                        <select id="providerFilter" class="models-filter-select">
+                        <select id="providerFilter" class="models-filter-select" onchange="filterModels()">
                             <option value="all">All Providers</option>
                             <option value="openai">OpenAI</option>
                             <option value="anthropic">Anthropic</option>
@@ -3200,7 +3207,7 @@
                     </div>
                     <div class="models-filter-group">
                         <label class="models-filter-label">Task Area</label>
-                        <select id="taskAreaFilter" class="models-filter-select">
+                        <select id="taskAreaFilter" class="models-filter-select" onchange="filterModels()">
                             <option value="all">All Tasks</option>
                             <option value="coding">Code Generation</option>
                             <option value="reasoning">Complex Reasoning</option>
@@ -3214,7 +3221,7 @@
                     </div>
                     <div class="models-filter-group">
                         <label class="models-filter-label">Model Type</label>
-                        <select id="modelTypeFilter" class="models-filter-select">
+                        <select id="modelTypeFilter" class="models-filter-select" onchange="filterModels()">
                             <option value="all">All Types</option>
                             <option value="text">Text-only</option>
                             <option value="multimodal">Multimodal</option>
@@ -3223,7 +3230,7 @@
                     </div>
                     <div class="models-filter-group">
                         <label class="models-filter-label">Search Models</label>
-                        <input type="text" id="modelsSearchInput" class="models-search-input" placeholder="Search models...">
+                        <input type="text" id="modelsSearchInput" class="models-search-input" placeholder="Search models..." oninput="filterModels()">
                     </div>
                 </div>
             </div>
@@ -3231,7 +3238,7 @@
             <!-- Models Sort Controls -->
             <div class="models-sort-controls">
                 <label for="modelsSortSelect" class="models-sort-label">Sort by:</label>
-                <select id="modelsSortSelect" class="models-sort-select">
+                <select id="modelsSortSelect" class="models-sort-select" onchange="sortModels()">
                     <option value="name">Name (A-Z)</option>
                     <option value="name-desc">Name (Z-A)</option>
                     <option value="provider">Provider</option>
@@ -4228,14 +4235,62 @@
             <h3 class="insights-title">🔍 AI Tools Comparison Matrix</h3>
             <p class="insights-subtitle">Comprehensive analysis of 20+ AI platforms, coding assistants, and development tools</p>
             
-            <div class="category-nav">
-                <button class="category-btn active" data-category="all">All Tools</button>
-                <button class="category-btn" data-category="foundation">Foundation Models</button>
-                <button class="category-btn" data-category="development">Development Tools</button>
-                <button class="category-btn" data-category="coding">Coding Assistants</button>
-                <button class="category-btn" data-category="platform">All-in-One Platforms</button>
-                <button class="category-btn" data-category="terminal">Terminal Tools</button>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label class="filter-label">Tool Category</label>
+                    <select id="workingCategoryFilter" onchange="workingFilterTools()">
+                        <option value="all">All Categories</option>
+                        <option value="foundation">Foundation Models</option>
+                        <option value="coding">Coding Assistants</option>
+                        <option value="platform">All-in-One Platforms</option>
+                        <option value="terminal">Terminal Tools</option>
+                        <option value="nocode">No-Code Platforms</option>
+                        <option value="frontend">UI/Frontend Tools</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Price Range</label>
+                    <select id="workingPriceFilter" onchange="workingFilterTools()">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free/Freemium</option>
+                        <option value="low">Under $20/month</option>
+                        <option value="medium">$20-$100/month</option>
+                        <option value="high">$100+/month</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Security Level</label>
+                    <select id="workingSecurityFilter" onchange="workingFilterTools()">
+                        <option value="all">All Security Levels</option>
+                        <option value="enterprise">Enterprise Grade</option>
+                        <option value="business">Business Grade</option>
+                        <option value="basic">Basic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Key Feature</label>
+                    <select id="workingFeatureFilter" onchange="workingFilterTools()">
+                        <option value="all">All Features</option>
+                        <option value="ai-first-design">AI-First Design</option>
+                        <option value="enterprise-security">Enterprise Security</option>
+                        <option value="open-source">Open Source</option>
+                        <option value="real-time-collaboration">Real-Time Collaboration</option>
+                        <option value="multi-model">Multi-Model Access</option>
+                        <option value="code-generation">Code Generation</option>
+                        <option value="visual-design">Visual Design</option>
+                        <option value="privacy-first">Privacy-First</option>
+                        <option value="cloud-integration">Cloud Integration</option>
+                        <option value="terminal-ai">Terminal AI</option>
+                        <option value="no-code">No-Code</option>
+                        <option value="real-time-data">Real-Time Data</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Search Tools</label>
+                    <input type="text" id="workingSearchInput" oninput="workingFilterTools()" placeholder="Search by name or feature...">
+                </div>
             </div>
+            
             
             <div class="sort-controls">
                 <label for="sortSelect" class="sort-label">Sort by:</label>
@@ -6743,8 +6798,7 @@
         const featureFilter = document.getElementById('featureFilter');
         const searchInput = document.getElementById('searchInput');
         const sortSelect = document.getElementById('sortSelect');
-        const toolsGrid = document.getElementById('toolsGrid');
-        const categoryBtns = document.querySelectorAll('.category-btn');
+        const toolsGrid = document.getElementById('toolsGrid') || document.querySelector('.tools-grid');
 
         function getToolName(card) {
             const toolNameElement = card.querySelector('.tool-name a');
@@ -6762,8 +6816,14 @@
         }
 
         function sortTools() {
+            const sortSelect = document.getElementById('sortSelect');
+            if (!sortSelect) {
+                return;
+            }
+            
             const sortValue = sortSelect.value;
             const toolCards = Array.from(document.querySelectorAll('.tool-card'));
+            
             
             toolCards.sort((a, b) => {
                 switch (sortValue) {
@@ -6785,10 +6845,98 @@
             });
             
             // Re-append sorted cards to the grid
-            toolCards.forEach(card => toolsGrid.appendChild(card));
+            const currentToolsGrid = document.getElementById('toolsGrid') || document.querySelector('.tools-grid');
+            if (currentToolsGrid) {
+                toolCards.forEach(card => currentToolsGrid.appendChild(card));
+            }
+        }
+
+        // WORKING FILTER FUNCTION
+        function workingFilterTools() {
+            const categoryFilter = document.getElementById('workingCategoryFilter');
+            const priceFilter = document.getElementById('workingPriceFilter');
+            const securityFilter = document.getElementById('workingSecurityFilter');
+            const featureFilter = document.getElementById('workingFeatureFilter');
+            const searchInput = document.getElementById('workingSearchInput');
+            
+            if (!categoryFilter || !priceFilter || !securityFilter || !featureFilter || !searchInput) return;
+            
+            const categoryValue = categoryFilter.value;
+            const priceValue = priceFilter.value;
+            const securityValue = securityFilter.value;
+            const featureValue = featureFilter.value;
+            const searchValue = searchInput.value.toLowerCase().trim();
+            
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                // Clear previous highlights
+                clearHighlights(card);
+                
+                const category = card.dataset.category || '';
+                const price = card.dataset.price || '';
+                const security = card.dataset.security || '';
+                const feature = card.dataset.feature || '';
+                const content = card.textContent.toLowerCase();
+                
+                let show = true;
+                
+                if (categoryValue !== 'all' && category !== categoryValue) show = false;
+                if (priceValue !== 'all' && price !== priceValue) show = false;
+                if (securityValue !== 'all' && security !== securityValue) show = false;
+                if (featureValue !== 'all' && feature !== featureValue) show = false;
+                if (searchValue && searchValue.length > 0 && !content.includes(searchValue)) show = false;
+                
+                // Highlight search term if showing and searching
+                if (show && searchValue && searchValue.length > 0) {
+                    highlightText(card, searchValue);
+                }
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+        
+        function clearHighlights(element) {
+            // Store original innerHTML if not already stored
+            if (!element.dataset.originalHtml) {
+                element.dataset.originalHtml = element.innerHTML;
+            } else {
+                // Restore original HTML
+                element.innerHTML = element.dataset.originalHtml;
+            }
+        }
+        
+        function highlightText(element, searchTerm) {
+            // Store original HTML if not already stored
+            if (!element.dataset.originalHtml) {
+                element.dataset.originalHtml = element.innerHTML;
+            }
+            
+            // Use the original HTML for highlighting
+            let html = element.dataset.originalHtml;
+            
+            // Create regex for case-insensitive search with global flag
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            
+            // Replace all matches with highlighted version
+            html = html.replace(regex, '<mark style="background-color: #ffff00; font-weight: bold; color: #000;">$1</mark>');
+            
+            // Update the element
+            element.innerHTML = html;
         }
 
         function filterTools() {
+            // Get fresh references to avoid stale closures
+            const categoryFilter = document.getElementById('categoryFilter');
+            const priceFilter = document.getElementById('priceFilter');
+            const securityFilter = document.getElementById('securityFilter');
+            const featureFilter = document.getElementById('featureFilter');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (!categoryFilter || !priceFilter || !securityFilter || !featureFilter || !searchInput) {
+                return;
+            }
+            
             const categoryValue = categoryFilter.value;
             const priceValue = priceFilter.value;
             const securityValue = securityFilter.value;
@@ -6810,31 +6958,34 @@
                 if (priceValue !== 'all' && price !== priceValue) show = false;
                 if (securityValue !== 'all' && security !== securityValue) show = false;
                 if (featureValue !== 'all' && feature !== featureValue) show = false;
-                if (searchValue && !content.includes(searchValue)) show = false;
+                if (searchValue && searchValue.length > 0 && !content.includes(searchValue)) show = false;
                 
                 card.style.display = show ? 'block' : 'none';
             });
         }
 
-        // Category button functionality
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const category = btn.dataset.category;
-                categoryFilter.value = category;
-                filterTools();
-            });
-        });
 
-        // Filter event listeners
-        categoryFilter.addEventListener('change', filterTools);
-        priceFilter.addEventListener('change', filterTools);
-        securityFilter.addEventListener('change', filterTools);
-        featureFilter.addEventListener('change', filterTools);
-        searchInput.addEventListener('input', filterTools);
-        sortSelect.addEventListener('change', sortTools);
+        // Filter event listeners - will be attached after DOM loads
+        function attachFilterListeners() {
+            // Use event delegation to handle events even after DOM changes
+            document.addEventListener('change', function(e) {
+                if (e.target.id === 'categoryFilter' || 
+                    e.target.id === 'priceFilter' || 
+                    e.target.id === 'securityFilter' || 
+                    e.target.id === 'featureFilter') {
+                    filterTools();
+                }
+                if (e.target.id === 'sortSelect') {
+                    sortTools();
+                }
+            });
+            
+            document.addEventListener('input', function(e) {
+                if (e.target.id === 'searchInput') {
+                    filterTools();
+                }
+            });
+        }
 
         // Table filtering and sorting functionality
         const tableCategory = document.getElementById('tableCategory');
@@ -7076,6 +7227,8 @@
         }
 
         function sortModels() {
+            const modelsSortSelect = document.getElementById('modelsSortSelect');
+            if (!modelsSortSelect) return;
             const sortValue = modelsSortSelect.value;
             const modelCards = Array.from(document.querySelectorAll('.model-card'));
             
@@ -7107,6 +7260,15 @@
         }
 
         function filterModels() {
+            const providerFilter = document.getElementById('providerFilter');
+            const taskAreaFilter = document.getElementById('taskAreaFilter');
+            const modelTypeFilter = document.getElementById('modelTypeFilter');
+            const modelsSearchInput = document.getElementById('modelsSearchInput');
+            
+            if (!providerFilter || !taskAreaFilter || !modelTypeFilter || !modelsSearchInput) {
+                return;
+            }
+            
             const providerValue = providerFilter.value;
             const taskAreaValue = taskAreaFilter.value;
             const modelTypeValue = modelTypeFilter.value;
@@ -7115,6 +7277,9 @@
             const modelCards = document.querySelectorAll('.model-card');
             
             modelCards.forEach(card => {
+                // Clear previous highlights
+                clearHighlights(card);
+                
                 const provider = card.dataset.provider;
                 const taskAreas = card.dataset.taskAreas;
                 const modelType = card.dataset.modelType;
@@ -7140,6 +7305,11 @@
                 // Search filter
                 if (searchValue && !content.includes(searchValue)) {
                     show = false;
+                }
+                
+                // Highlight search term if showing and searching
+                if (show && searchValue && searchValue.length > 0) {
+                    highlightText(card, searchValue);
                 }
                 
                 if (show) {
@@ -7189,7 +7359,6 @@
 
         // Initialize collapsible sections
         function initializeCollapsibleSections() {
-            console.log('Initializing collapsible sections...');
             // Convert major sections to collapsible
             const sectionsToMakeCollapsible = [
                 { selector: '.comparison-section', title: '📊 AI Tools Quick Reference Matrix', subtitle: 'Interactive comparison table with filtering and sorting capabilities' },
@@ -7207,7 +7376,7 @@
                     
                     // Create header
                     const header = document.createElement('div');
-                    header.className = 'section-header active';
+                    header.className = 'section-header';
                     header.onclick = () => toggleSection(header);
                     
                     const titleDiv = document.createElement('div');
@@ -7224,14 +7393,14 @@
                     
                     const toggle = document.createElement('button');
                     toggle.className = 'section-toggle';
-                    toggle.innerHTML = '▲';
+                    toggle.innerHTML = '▼';
                     
                     header.appendChild(titleDiv);
                     header.appendChild(toggle);
                     
                     // Create content wrapper
                     const contentWrapper = document.createElement('div');
-                    contentWrapper.className = 'section-content expanded';
+                    contentWrapper.className = 'section-content collapsed';
                     
                     const innerWrapper = document.createElement('div');
                     innerWrapper.className = 'section-inner';
@@ -7266,7 +7435,9 @@
                         const titleText = titleElement.textContent.trim();
                         let config = {};
                         
-                        if (titleText.includes('Key Insights for Software Companies')) {
+                        if (titleText.includes('Understanding AI Tool Categories')) {
+                            config = { title: '🧠 Understanding AI Tool Categories', subtitle: 'Overview of different AI platform types and their optimal use cases' };
+                        } else if (titleText.includes('Key Insights for Software Companies')) {
                             config = { title: '💡 Key Insights for Software Companies', subtitle: 'Strategic guidance for technical decision makers and engineering teams' };
                         } else if (titleText.includes('AI Models Comprehensive Analysis')) {
                             config = { title: '🧬 AI Models Comprehensive Analysis', subtitle: 'Detailed breakdown of AI models, their capabilities, optimal task areas, and unique features' };
@@ -7289,7 +7460,7 @@
                             
                             // Create header
                             const header = document.createElement('div');
-                            header.className = 'section-header active';
+                            header.className = 'section-header';
                             header.onclick = () => toggleSection(header);
                             
                             const titleDiv = document.createElement('div');
@@ -7306,14 +7477,14 @@
                             
                             const toggle = document.createElement('button');
                             toggle.className = 'section-toggle';
-                            toggle.innerHTML = '▲';
+                            toggle.innerHTML = '▼';
                             
                             header.appendChild(titleDiv);
                             header.appendChild(toggle);
                             
                             // Create content wrapper
                             const contentWrapper = document.createElement('div');
-                            contentWrapper.className = 'section-content expanded';
+                            contentWrapper.className = 'section-content collapsed';
                             
                             const innerWrapper = document.createElement('div');
                             innerWrapper.className = 'section-inner';
@@ -7342,7 +7513,30 @@
         // Add smooth transitions when styles change
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+            
+            // Attach event listeners first (using delegation, so they work even after DOM changes)
+            attachFilterListeners();
+            
+            // Then initialize collapsible sections
             initializeCollapsibleSections();
+            
+            // Run initial filter to set proper display
+            setTimeout(() => {
+                filterTools();
+                
+                // Add direct event listeners as backup to ensure filters work
+                const catFilter = document.getElementById('categoryFilter');
+                const priceFilter = document.getElementById('priceFilter');
+                const secFilter = document.getElementById('securityFilter');
+                const featFilter = document.getElementById('featureFilter');
+                const searchInput = document.getElementById('searchInput');
+                
+                if (catFilter) catFilter.addEventListener('change', filterTools);
+                if (priceFilter) priceFilter.addEventListener('change', filterTools);
+                if (secFilter) secFilter.addEventListener('change', filterTools);
+                if (featFilter) featFilter.addEventListener('change', filterTools);
+                if (searchInput) searchInput.addEventListener('input', filterTools);
+            }, 500);
             
             // Collapse/Expand All functionality
             const collapseAllBtn = document.getElementById('collapseAllBtn');
@@ -7350,11 +7544,9 @@
             
             if (collapseAllBtn) {
                 collapseAllBtn.addEventListener('click', function() {
-                    console.log('Collapse button clicked!');
                     const collapseText = this.querySelector('.collapse-text');
                     const collapseIcon = this.querySelector('.collapse-icon');
                     const allSectionHeaders = document.querySelectorAll('.section-header');
-                    console.log('Found', allSectionHeaders.length, 'section headers');
                     
                     allCollapsed = !allCollapsed;
                     
