@@ -203,6 +203,11 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .collapse-all-btn:hover {
@@ -757,6 +762,23 @@
             z-index: 1000 !important;
             position: relative !important;
             cursor: pointer !important;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='m2 0-2 2h4zm0 5 2-2h-4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 12px;
+            padding-right: 32px;
+        }
+
+        [data-theme="dark"] select {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23a0aec0' d='m2 0-2 2h4zm0 5 2-2h-4z'/%3E%3C/svg%3E");
         }
 
         [data-theme="dark"] select, [data-theme="dark"] input {
@@ -1657,6 +1679,9 @@
             align-items: center;
             user-select: none;
             outline: none;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
 
         [data-theme="dark"] .section-header {
@@ -3138,8 +3163,8 @@
             
             <div class="global-controls">
                 <button id="collapseAllBtn" class="collapse-all-btn">
-                    <span class="collapse-icon">📋</span>
-                    <span class="collapse-text">Collapse All Sections</span>
+                    <span class="collapse-icon">📖</span>
+                    <span class="collapse-text">Expand All Sections</span>
                 </button>
             </div>
         </div>
@@ -6912,17 +6937,53 @@
                 element.dataset.originalHtml = element.innerHTML;
             }
             
-            // Use the original HTML for highlighting
-            let html = element.dataset.originalHtml;
+            // Restore original HTML first
+            element.innerHTML = element.dataset.originalHtml;
             
-            // Create regex for case-insensitive search with global flag
-            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            // Use TreeWalker to find only text nodes (not HTML attributes)
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        // Skip text nodes that are inside script or style tags
+                        const parent = node.parentElement;
+                        if (parent && (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
             
-            // Replace all matches with highlighted version
-            html = html.replace(regex, '<mark style="background-color: #ffff00; font-weight: bold; color: #000;">$1</mark>');
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
             
-            // Update the element
-            element.innerHTML = html;
+            // Process each text node
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const lowerText = text.toLowerCase();
+                const lowerSearchTerm = searchTerm.toLowerCase();
+                
+                if (lowerText.includes(lowerSearchTerm)) {
+                    const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                    const highlightedHTML = text.replace(regex, '<mark style="background-color: #ffff00; font-weight: bold; color: #000;">$1</mark>');
+                    
+                    // Only replace if we actually added highlights
+                    if (highlightedHTML !== text) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = highlightedHTML;
+                        const fragment = document.createDocumentFragment();
+                        while (tempDiv.firstChild) {
+                            fragment.appendChild(tempDiv.firstChild);
+                        }
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                }
+            });
         }
 
         function filterTools() {
@@ -7231,6 +7292,9 @@
             if (!modelsSortSelect) return;
             const sortValue = modelsSortSelect.value;
             const modelCards = Array.from(document.querySelectorAll('.model-card'));
+            const modelsGrid = document.querySelector('.models-grid');
+            
+            if (!modelsGrid) return;
             
             modelCards.sort((a, b) => {
                 switch (sortValue) {
@@ -7540,7 +7604,7 @@
             
             // Collapse/Expand All functionality
             const collapseAllBtn = document.getElementById('collapseAllBtn');
-            let allCollapsed = false;
+            let allCollapsed = true; // Start as true since sections start collapsed
             
             if (collapseAllBtn) {
                 collapseAllBtn.addEventListener('click', function() {
