@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             --bg-gradient-dark: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
             --card-bg: #ffffff;
             --card-bg-dark: #2d3748;
@@ -15,8 +15,8 @@
             --text-color-dark: #e2e8f0;
             --text-muted: #666666;
             --text-muted-dark: #a0aec0;
-            --accent-color: #667eea;
-            --accent-hover: #5a67d8;
+            --accent-color: #22c55e;
+            --accent-hover: #16a34a;
             --border-color: #e2e8f0;
             --border-color-dark: #4a5568;
             --shadow: rgba(0,0,0,0.1);
@@ -52,6 +52,11 @@
             position: relative;
         }
 
+        .container > * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
         .header-controls {
             position: absolute;
             top: 20px;
@@ -66,11 +71,12 @@
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.5rem;
+            padding: 0.75rem 1rem;
             color: var(--text-color);
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 140px;
         }
 
         .style-selector:hover {
@@ -97,8 +103,9 @@
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 50px;
-            width: 60px;
-            height: 30px;
+            width: 70px;
+            height: 36px;
+            padding: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -132,6 +139,8 @@
             transform: translateX(28px);
         }
 
+        /* Collapse All Button */
+
         .header {
             text-align: center;
             margin-bottom: 40px;
@@ -149,20 +158,15 @@
 
         .header h1 {
             font-size: 2.5rem;
-            color: var(--text-color);
+            color: #15803d;
             margin-bottom: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-align: center;
+            font-weight: 700;
             transition: color 0.3s ease;
         }
 
         [data-theme="dark"] .header h1 {
-            background: linear-gradient(135deg, #8b5cf6, #a855f7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #22c55e;
         }
 
         .header p {
@@ -175,6 +179,43 @@
 
         [data-theme="dark"] .header p {
             color: var(--text-muted-dark);
+        }
+
+        .global-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .collapse-all-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+        }
+
+        .collapse-all-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        .collapse-icon {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-all-btn.expanded .collapse-icon {
+            transform: rotate(180deg);
         }
 
         .category-nav {
@@ -208,7 +249,7 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
             scale: 1.05;
         }
 
@@ -325,7 +366,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
             transition: left 0.5s ease;
         }
 
@@ -943,6 +984,732 @@
             color: var(--text-muted-dark);
         }
 
+        /* AI Models Analysis Section */
+        .models-analysis-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        [data-theme="dark"] .models-analysis-section {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .models-analysis-title {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .models-analysis-title {
+            color: var(--text-color-dark);
+        }
+
+        .models-analysis-subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .models-analysis-subtitle {
+            color: var(--text-muted-dark);
+        }
+
+        /* Models Filter Section */
+        .models-filter-section {
+            background: var(--tier-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .models-filter-section {
+            background: var(--tier-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .models-filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .models-filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .models-filter-label {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .models-filter-label {
+            color: var(--text-color-dark);
+        }
+
+        .models-filter-select, .models-search-input {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .models-filter-select:hover, .models-search-input:hover,
+        .models-filter-select:focus, .models-search-input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        [data-theme="dark"] .models-filter-select, 
+        [data-theme="dark"] .models-search-input {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        /* Models Sort Controls */
+        .models-sort-controls {
+            background: var(--tier-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .models-sort-controls {
+            background: var(--tier-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .models-sort-label {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .models-sort-label {
+            color: var(--text-color-dark);
+        }
+
+        .models-sort-select {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 10px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .models-sort-select:hover, .models-sort-select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        [data-theme="dark"] .models-sort-select {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        /* Models Grid */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .model-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .model-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        [data-theme="dark"] .model-card {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .model-header {
+            border-bottom-color: var(--border-color-dark);
+        }
+
+        .model-name {
+            color: var(--accent-color);
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .model-provider {
+            background: var(--tier-bg);
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .model-provider {
+            background: var(--tier-bg-dark);
+            color: var(--text-muted-dark);
+        }
+
+        .model-capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .capability-tag {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .capability-tag.multimodal {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .capability-tag.reasoning {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .capability-tag.coding {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .capability-tag.writing {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .capability-tag.analysis {
+            background: #e0f2f1;
+            color: #00695c;
+        }
+
+        .capability-tag.creative {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .capability-tag.research {
+            background: #e8eaf6;
+            color: #3f51b5;
+        }
+
+        .capability-tag.math {
+            background: #f1f8e9;
+            color: #558b2f;
+        }
+
+        [data-theme="dark"] .capability-tag.multimodal {
+            background: rgba(21, 101, 192, 0.2);
+            color: #90caf9;
+        }
+
+        [data-theme="dark"] .capability-tag.reasoning {
+            background: rgba(123, 31, 162, 0.2);
+            color: #ce93d8;
+        }
+
+        [data-theme="dark"] .capability-tag.coding {
+            background: rgba(46, 125, 50, 0.2);
+            color: #a5d6a7;
+        }
+
+        [data-theme="dark"] .capability-tag.writing {
+            background: rgba(239, 108, 0, 0.2);
+            color: #ffcc02;
+        }
+
+        [data-theme="dark"] .capability-tag.analysis {
+            background: rgba(0, 105, 92, 0.2);
+            color: #80cbc4;
+        }
+
+        [data-theme="dark"] .capability-tag.creative {
+            background: rgba(194, 24, 91, 0.2);
+            color: #f48fb1;
+        }
+
+        [data-theme="dark"] .capability-tag.research {
+            background: rgba(63, 81, 181, 0.2);
+            color: #9fa8da;
+        }
+
+        [data-theme="dark"] .capability-tag.math {
+            background: rgba(85, 139, 47, 0.2);
+            color: #c5e1a5;
+        }
+
+        /* Additional capability tags for new models */
+        .capability-tag.embedding {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .capability-tag.agentic {
+            background: #e0f7fa;
+            color: #00695c;
+        }
+
+        .capability-tag.enterprise {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .capability-tag.lightweight {
+            background: #f9fbe7;
+            color: #827717;
+        }
+
+        .capability-tag.vision {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .capability-tag.specialist {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .capability-tag.fast {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .capability-tag.developer {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .capability-tag.semantic {
+            background: #e8eaf6;
+            color: #3f51b5;
+        }
+
+        .capability-tag.vector {
+            background: #f1f8e9;
+            color: #558b2f;
+        }
+
+        [data-theme="dark"] .capability-tag.embedding {
+            background: rgba(123, 31, 162, 0.2);
+            color: #ce93d8;
+        }
+
+        [data-theme="dark"] .capability-tag.agentic {
+            background: rgba(0, 105, 92, 0.2);
+            color: #80cbc4;
+        }
+
+        [data-theme="dark"] .capability-tag.enterprise {
+            background: rgba(245, 127, 23, 0.2);
+            color: #ffcc02;
+        }
+
+        [data-theme="dark"] .capability-tag.lightweight {
+            background: rgba(130, 119, 23, 0.2);
+            color: #d4e157;
+        }
+
+        [data-theme="dark"] .capability-tag.vision {
+            background: rgba(194, 24, 91, 0.2);
+            color: #f48fb1;
+        }
+
+        [data-theme="dark"] .capability-tag.specialist {
+            background: rgba(46, 125, 50, 0.2);
+            color: #a5d6a7;
+        }
+
+        [data-theme="dark"] .capability-tag.fast {
+            background: rgba(21, 101, 192, 0.2);
+            color: #90caf9;
+        }
+
+        [data-theme="dark"] .capability-tag.developer {
+            background: rgba(239, 108, 0, 0.2);
+            color: #ffcc02;
+        }
+
+        [data-theme="dark"] .capability-tag.semantic {
+            background: rgba(63, 81, 181, 0.2);
+            color: #9fa8da;
+        }
+
+        [data-theme="dark"] .capability-tag.vector {
+            background: rgba(85, 139, 47, 0.2);
+            color: #c5e1a5;
+        }
+
+        .model-description p {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .model-description p {
+            color: var(--text-color-dark);
+        }
+
+        .model-excels h5, .model-additional h5 {
+            color: var(--accent-color);
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .model-excels ul, .model-additional ul {
+            margin: 0;
+            padding-left: 16px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .model-excels ul, 
+        [data-theme="dark"] .model-additional ul {
+            color: var(--text-muted-dark);
+        }
+
+        .model-excels li, .model-additional li {
+            line-height: 1.4;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Hidden state for filtered models */
+        .model-card.hidden {
+            display: none;
+        }
+
+        /* Ollama Installation Sections */
+        .model-ollama {
+            background: var(--tier-bg);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .model-ollama {
+            background: var(--tier-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .model-ollama h5 {
+            color: var(--accent-color);
+            margin: 0 0 12px 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .ollama-variants {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ollama-variant {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: var(--card-bg);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .ollama-variant {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .ollama-variant:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .variant-name {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .variant-name {
+            color: var(--text-color-dark);
+        }
+
+        .variant-size {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .variant-size {
+            color: var(--text-muted-dark);
+        }
+
+        .command-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ollama-command {
+            background: var(--tier-bg);
+            color: var(--text-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .ollama-command {
+            background: var(--tier-bg-dark);
+            color: var(--text-color-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .copy-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 6px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-section {
+            margin-bottom: 30px;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 15px;
+            background: transparent;
+        }
+
+        [data-theme="dark"] .collapsible-section {
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+
+        .section-header {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px 15px 0 0;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            outline: none;
+        }
+
+        [data-theme="dark"] .section-header {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .section-header:hover {
+            border-color: var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        [data-theme="dark"] .section-header:hover {
+            border-color: var(--border-color-dark);
+        }
+
+        .section-header.active {
+            border-color: var(--border-color);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        [data-theme="dark"] .section-header.active {
+            border-color: var(--border-color-dark);
+        }
+
+        .section-header:focus {
+            outline: none;
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .section-header:focus {
+            border-color: var(--border-color-dark);
+        }
+
+        .section-title {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .section-title {
+            color: var(--text-color-dark);
+        }
+
+        .section-subtitle {
+            margin: 5px 0 0 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .section-subtitle {
+            color: var(--text-muted-dark);
+        }
+
+        .section-toggle {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .section-toggle:hover {
+            background: var(--accent-hover);
+            transform: scale(1.1);
+        }
+
+        .section-toggle.collapsed {
+            transform: rotate(180deg);
+        }
+
+        .section-toggle.collapsed:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        .section-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .section-content {
+            background: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .section-content.expanded {
+            max-height: none;
+            padding: 0;
+        }
+
+        .section-inner {
+            padding: 0 25px 25px 25px;
+        }
+
         /* Last Updated Section */
         .last-updated {
             margin-top: 40px;
@@ -1074,16 +1841,21 @@
 
 
         .disclaimer {
-            background: var(--tier-bg);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
             border: 1px solid var(--border-color);
+            margin: 30px 0;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         [data-theme="dark"] .disclaimer {
-            background: var(--tier-bg-dark);
+            background: var(--card-bg-dark);
             border-color: var(--border-color-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
         }
 
         .disclaimer p {
@@ -1095,6 +1867,27 @@
 
         [data-theme="dark"] .disclaimer p {
             color: var(--text-muted-dark);
+        }
+
+        .last-updated-inline {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .last-updated-inline {
+            border-color: var(--border-color-dark);
+            color: var(--text-muted-dark);
+        }
+
+        .last-updated-icon {
+            font-size: 1rem;
         }
 
         /* MCP Tools Grid Styling */
@@ -1315,27 +2108,43 @@
 
         /* Grid Header Styles */
         .grid-header {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
             margin: 30px 0 20px 0;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
             text-align: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        [data-theme="dark"] .grid-header {
+            background: var(--card-bg-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            border-color: var(--border-color-dark);
         }
 
         .grid-title {
-            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent-color);
-            margin: 0 0 8px 0;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .grid-title {
+            color: var(--text-color-dark);
         }
 
         .grid-subtitle {
-            font-size: 1.1rem;
             color: var(--text-muted);
-            margin: 0;
-            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
         [data-theme="dark"] .grid-subtitle {
@@ -1721,6 +2530,16 @@
             .comparison-section {
                 padding: 0 15px;
             }
+            
+            
+            .collapse-all-btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .global-controls {
+                margin-top: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1761,6 +2580,29 @@
             .comparison-section {
                 padding: 0 10px;
             }
+            
+            
+            .collapse-all-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .collapse-text {
+                display: none;
+            }
+            
+            .collapse-icon {
+                margin: 0;
+            }
+            
+            .disclaimer {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .disclaimer p {
+                font-size: 0.85rem;
+            }
         }
 
         /* Key Insights Section Styles */
@@ -1772,6 +2614,9 @@
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         [data-theme="dark"] .insights-section {
@@ -1790,6 +2635,18 @@
 
         [data-theme="dark"] .insights-title {
             color: var(--text-color-dark);
+        }
+
+        .insights-subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .insights-subtitle {
+            color: var(--text-muted-dark);
         }
 
         .insights-grid {
@@ -1841,13 +2698,13 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            background: var(--accent-color);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
             font-size: 20px;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -1866,7 +2723,7 @@
 
         .back-to-top:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
             filter: brightness(1.1);
         }
 
@@ -1874,6 +2731,14 @@
             transform: translateY(-1px);
         }
 
+        [data-theme="dark"] .back-to-top {
+            background: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        [data-theme="dark"] .back-to-top:hover {
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+        }
 
         /* Glassmorphism Style */
         [data-style="glassmorphism"] body {
@@ -2093,6 +2958,98 @@
             [data-style="neumorphism"][data-theme="dark"] .tool-card {
                 box-shadow: 10px 10px 30px #1a202c, -10px -10px 30px #404c5a !important;
             }
+
+            /* Models section mobile responsive */
+            .models-filter-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .models-analysis-section {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .model-card {
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .model-name {
+                font-size: 1.1rem;
+            }
+
+            .model-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .models-analysis-title {
+                font-size: 1.3rem;
+            }
+
+            .models-analysis-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .ollama-variant {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .command-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .ollama-command {
+                flex: 1;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .models-sort-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .models-sort-select {
+                width: 100%;
+                min-width: unset;
+            }
+
+            /* Collapsible sections mobile */
+            .section-header {
+                padding: 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .section-toggle {
+                align-self: flex-end;
+                margin-top: -30px;
+            }
+
+            .section-inner {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -2111,6 +3068,13 @@
         <div class="header">
             <h1>Enterprise AI Tools Comparison Matrix 2025</h1>
             <p>Comprehensive comparison of AI platforms, development tools, coding assistants, and IDEs for software companies. Evaluate pricing, features, security, and available models to make informed technology decisions.</p>
+            
+            <div class="global-controls">
+                <button id="collapseAllBtn" class="collapse-all-btn">
+                    <span class="collapse-icon">📋</span>
+                    <span class="collapse-text">Collapse All Sections</span>
+                </button>
+            </div>
         </div>
 
         <div class="filter-section">
@@ -2199,20 +3163,1079 @@
                 </div>
             </div>
         </div>
+        </div>
 
-        <div class="category-nav">
-            <button class="category-btn active" data-category="all">All Tools</button>
-            <button class="category-btn" data-category="foundation">Foundation Models</button>
-            <button class="category-btn" data-category="development">Development Tools</button>
-            <button class="category-btn" data-category="coding">Coding Assistants</button>
-            <button class="category-btn" data-category="platform">All-in-One Platforms</button>
-            <button class="category-btn" data-category="terminal">Terminal Tools</button>
+        <!-- AI Models Comprehensive Analysis -->
+        <div class="insights-section">
+            <h3 class="insights-title">🧬 AI Models Comprehensive Analysis</h3>
+            <p class="insights-subtitle">Detailed breakdown of AI models, their capabilities, optimal task areas, and unique features</p>
+            
+            <!-- Model Filters -->
+            <div class="models-filter-section">
+                <div class="models-filter-grid">
+                    <div class="models-filter-group">
+                        <label class="models-filter-label">Model Provider</label>
+                        <select id="providerFilter" class="models-filter-select">
+                            <option value="all">All Providers</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="google">Google</option>
+                            <option value="microsoft">Microsoft</option>
+                            <option value="meta">Meta</option>
+                            <option value="perplexity">Perplexity</option>
+                            <option value="mistral">Mistral</option>
+                            <option value="xai">xAI</option>
+                            <option value="deepseek">DeepSeek</option>
+                            <option value="alibaba">Alibaba (Qwen)</option>
+                            <option value="phi">Microsoft (Phi)</option>
+                            <option value="cohere">Cohere</option>
+                            <option value="hailo">Hailo</option>
+                            <option value="nomic">Nomic AI</option>
+                            <option value="snowflake">Snowflake</option>
+                            <option value="openchat">OpenChat</option>
+                            <option value="wizard">WizardLM</option>
+                            <option value="solar">Solar</option>
+                            <option value="orca">Microsoft (Orca)</option>
+                        </select>
+                    </div>
+                    <div class="models-filter-group">
+                        <label class="models-filter-label">Task Area</label>
+                        <select id="taskAreaFilter" class="models-filter-select">
+                            <option value="all">All Tasks</option>
+                            <option value="coding">Code Generation</option>
+                            <option value="reasoning">Complex Reasoning</option>
+                            <option value="writing">Content Writing</option>
+                            <option value="analysis">Data Analysis</option>
+                            <option value="creative">Creative Tasks</option>
+                            <option value="research">Research & Search</option>
+                            <option value="multimodal">Multimodal</option>
+                            <option value="math">Mathematics</option>
+                        </select>
+                    </div>
+                    <div class="models-filter-group">
+                        <label class="models-filter-label">Model Type</label>
+                        <select id="modelTypeFilter" class="models-filter-select">
+                            <option value="all">All Types</option>
+                            <option value="text">Text-only</option>
+                            <option value="multimodal">Multimodal</option>
+                            <option value="specialized">Specialized</option>
+                        </select>
+                    </div>
+                    <div class="models-filter-group">
+                        <label class="models-filter-label">Search Models</label>
+                        <input type="text" id="modelsSearchInput" class="models-search-input" placeholder="Search models...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Models Sort Controls -->
+            <div class="models-sort-controls">
+                <label for="modelsSortSelect" class="models-sort-label">Sort by:</label>
+                <select id="modelsSortSelect" class="models-sort-select">
+                    <option value="name">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="provider">Provider</option>
+                    <option value="task-area">Primary Task Area</option>
+                    <option value="model-type">Model Type</option>
+                </select>
+            </div>
+
+            <!-- Models Grid -->
+            <div class="models-grid" id="modelsGrid">
+                <!-- GPT-4o -->
+                <div class="model-card" data-provider="openai" data-task-areas="coding,reasoning,writing,analysis,multimodal" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">GPT-4o</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Multimodal</span>
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag coding">Code Expert</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Most advanced OpenAI model with excellent multimodal capabilities, combining text, vision, and audio processing.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex reasoning and problem-solving</li>
+                            <li>Code generation and debugging</li>
+                            <li>Image analysis and vision tasks</li>
+                            <li>Mathematical problem solving</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Function calling</li>
+                            <li>JSON mode</li>
+                            <li>128K context window</li>
+                            <li>Real-time API support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Claude 3.5 Sonnet -->
+                <div class="model-card" data-provider="anthropic" data-task-areas="coding,reasoning,writing,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Claude 3.5 Sonnet</h4>
+                        <span class="model-provider">Anthropic</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Superior Reasoning</span>
+                        <span class="capability-tag coding">Code Specialist</span>
+                        <span class="capability-tag writing">Writing Expert</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Anthropic's flagship model known for exceptional reasoning, coding abilities, and helpful, harmless outputs.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex code generation and refactoring</li>
+                            <li>Detailed analysis and reasoning</li>
+                            <li>Long-form content creation</li>
+                            <li>Following instructions precisely</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>200K context window</li>
+                            <li>Constitutional AI safety</li>
+                            <li>Tool use and function calling</li>
+                            <li>Artifacts and interactive content</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gemini 1.5 Pro -->
+                <div class="model-card" data-provider="google" data-task-areas="reasoning,analysis,multimodal,research" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">Gemini 1.5 Pro</h4>
+                        <span class="model-provider">Google</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Multimodal</span>
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag analysis">Data Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Google's advanced multimodal model with exceptional long-context capabilities and integration with Google services.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Processing large documents and datasets</li>
+                            <li>Video and audio analysis</li>
+                            <li>Research and information synthesis</li>
+                            <li>Google Workspace integration</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>2M token context window</li>
+                            <li>Native multimodal training</li>
+                            <li>Google Search integration</li>
+                            <li>Code execution environment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GPT-4 Turbo -->
+                <div class="model-card" data-provider="openai" data-task-areas="coding,reasoning,writing,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">GPT-4 Turbo</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag coding">Code Generation</span>
+                        <span class="capability-tag writing">Content Creation</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Cost-efficient version of GPT-4 with improved speed and reduced pricing for high-volume applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>High-volume text processing</li>
+                            <li>API integrations</li>
+                            <li>Automated content generation</li>
+                            <li>Cost-sensitive applications</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>128K context window</li>
+                            <li>JSON mode</li>
+                            <li>Function calling</li>
+                            <li>Faster response times</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Llama 3.1 405B -->
+                <div class="model-card" data-provider="meta" data-task-areas="coding,reasoning,math,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Llama 3.1 405B</h4>
+                        <span class="model-provider">Meta</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Superior Reasoning</span>
+                        <span class="capability-tag math">Math Expert</span>
+                        <span class="capability-tag coding">Code Generation</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Meta's largest open-source model competing with closed-source alternatives in reasoning and coding tasks.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Mathematical reasoning and proofs</li>
+                            <li>Complex code generation</li>
+                            <li>Open-source deployment</li>
+                            <li>Fine-tuning for specific tasks</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>128K context window</li>
+                            <li>Tool use capabilities</li>
+                            <li>Multiple language support</li>
+                            <li>Commercial-friendly license</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Perplexity Pro -->
+                <div class="model-card" data-provider="perplexity" data-task-areas="research,analysis,writing" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">Perplexity Pro</h4>
+                        <span class="model-provider">Perplexity</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag research">Research Expert</span>
+                        <span class="capability-tag analysis">Real-time Data</span>
+                        <span class="capability-tag writing">Fact-based Writing</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Search-powered AI designed specifically for research and fact-based question answering with real-time information.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Real-time web search and analysis</li>
+                            <li>Academic and scientific research</li>
+                            <li>Fact-checking and verification</li>
+                            <li>Current events and news analysis</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Live web access</li>
+                            <li>Source citation</li>
+                            <li>Academic database access</li>
+                            <li>Multi-source verification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Grok-2 -->
+                <div class="model-card" data-provider="xai" data-task-areas="reasoning,creative,writing" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Grok-2</h4>
+                        <span class="model-provider">xAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag creative">Creative AI</span>
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag writing">Conversational</span>
+                    </div>
+                    <div class="model-description">
+                        <p>xAI's flagship model with a focus on real-time information and engaging, personality-rich interactions.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Engaging conversational AI</li>
+                            <li>Real-time Twitter/X integration</li>
+                            <li>Creative and humorous content</li>
+                            <li>Current events discussion</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Real-time X (Twitter) access</li>
+                            <li>Personality-driven responses</li>
+                            <li>Current events awareness</li>
+                            <li>Conversational memory</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mistral Large -->
+                <div class="model-card" data-provider="mistral" data-task-areas="coding,reasoning,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Mistral Large</h4>
+                        <span class="model-provider">Mistral</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Expert</span>
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag analysis">Efficient Processing</span>
+                    </div>
+                    <div class="model-description">
+                        <p>European AI company's flagship model focusing on efficiency, privacy, and competitive performance in coding tasks.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Efficient code generation</li>
+                            <li>European data privacy compliance</li>
+                            <li>Multi-language programming</li>
+                            <li>Cost-effective inference</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>32K context window</li>
+                            <li>Function calling</li>
+                            <li>JSON mode</li>
+                            <li>GDPR compliance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Claude 3.5 Haiku -->
+                <div class="model-card" data-provider="anthropic" data-task-areas="coding,writing,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Claude 3.5 Haiku</h4>
+                        <span class="model-provider">Anthropic</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Fast Coding</span>
+                        <span class="capability-tag writing">Quick Writing</span>
+                        <span class="capability-tag analysis">Efficient Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Anthropic's fastest model optimized for speed and efficiency while maintaining high quality outputs.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Rapid response applications</li>
+                            <li>Real-time coding assistance</li>
+                            <li>High-volume processing</li>
+                            <li>Cost-sensitive use cases</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>200K context window</li>
+                            <li>Sub-second response times</li>
+                            <li>Tool use support</li>
+                            <li>Batch processing optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GPT-4o Mini -->
+                <div class="model-card" data-provider="openai" data-task-areas="coding,writing,creative" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">GPT-4o Mini</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Assistant</span>
+                        <span class="capability-tag writing">Content Creation</span>
+                        <span class="capability-tag creative">Creative Tasks</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Smaller, more affordable version of GPT-4o designed for high-volume applications and rapid prototyping.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Budget-conscious applications</li>
+                            <li>Rapid prototyping</li>
+                            <li>Simple automation tasks</li>
+                            <li>Educational use cases</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>128K context window</li>
+                            <li>JSON mode</li>
+                            <li>Function calling</li>
+                            <li>Cost-optimized pricing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gemini 1.5 Flash -->
+                <div class="model-card" data-provider="google" data-task-areas="analysis,multimodal,creative" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">Gemini 1.5 Flash</h4>
+                        <span class="model-provider">Google</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Multimodal</span>
+                        <span class="capability-tag analysis">Fast Analysis</span>
+                        <span class="capability-tag creative">Creative AI</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Google's speed-optimized multimodal model balancing performance with cost-effectiveness for varied applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Quick multimodal analysis</li>
+                            <li>Image and video processing</li>
+                            <li>Real-time applications</li>
+                            <li>Mobile and edge deployment</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>1M token context window</li>
+                            <li>Native multimodal processing</li>
+                            <li>Fast inference speed</li>
+                            <li>Mobile optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- o1-preview -->
+                <div class="model-card" data-provider="openai" data-task-areas="reasoning,math,coding" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">o1-preview</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Deep Reasoning</span>
+                        <span class="capability-tag math">Math Specialist</span>
+                        <span class="capability-tag coding">Complex Coding</span>
+                    </div>
+                    <div class="model-description">
+                        <p>OpenAI's reasoning-focused model designed for complex problem-solving that requires deep thinking and step-by-step analysis.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex mathematical proofs</li>
+                            <li>Advanced algorithm development</li>
+                            <li>Scientific research problems</li>
+                            <li>Multi-step reasoning tasks</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Chain-of-thought reasoning</li>
+                            <li>Extended thinking time</li>
+                            <li>Self-correction mechanisms</li>
+                            <li>Research-grade outputs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GPT-OSS -->
+                <div class="model-card" data-provider="openai" data-task-areas="reasoning,coding,analysis" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">GPT-OSS</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag coding">Agentic Tasks</span>
+                        <span class="capability-tag analysis">Developer Focus</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Open-source optimized GPT model designed for reasoning, agentic tasks, and developer use cases.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex reasoning tasks</li>
+                            <li>Agentic workflow automation</li>
+                            <li>Developer tooling integration</li>
+                            <li>Open-source compatibility</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>20B and 120B parameter variants</li>
+                            <li>GitHub Copilot integration</li>
+                            <li>Ollama support</li>
+                            <li>Local deployment ready</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DeepSeek-R1 -->
+                <div class="model-card" data-provider="deepseek" data-task-areas="reasoning,math,coding,analysis" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">DeepSeek-R1</h4>
+                        <span class="model-provider">DeepSeek</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Deep Reasoning</span>
+                        <span class="capability-tag math">Math Expert</span>
+                        <span class="capability-tag coding">Code Specialist</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Open reasoning model family with performance approaching leading models like O3 and Gemini 2.5 Pro.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex reasoning chains</li>
+                            <li>Mathematical problem solving</li>
+                            <li>Code generation and analysis</li>
+                            <li>Research-grade inference</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Multiple sizes: 1.5B to 671B</li>
+                            <li>Enhanced reasoning capabilities</li>
+                            <li>Ollama and GitHub Copilot support</li>
+                            <li>Open-source availability</li>
+                        </ul>
+                    </div>
+                    <div class="model-ollama">
+                        <h5>🐋 Ollama Installation:</h5>
+                        <div class="ollama-variants">
+                            <div class="ollama-variant">
+                                <span class="variant-name">DeepSeek-R1:1.5b</span>
+                                <span class="variant-size">~900MB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull deepseek-r1:1.5b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull deepseek-r1:1.5b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">DeepSeek-R1:7b</span>
+                                <span class="variant-size">~4GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull deepseek-r1:7b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull deepseek-r1:7b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">DeepSeek-R1:14b</span>
+                                <span class="variant-size">~8GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull deepseek-r1:14b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull deepseek-r1:14b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">DeepSeek-R1:32b</span>
+                                <span class="variant-size">~18GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull deepseek-r1:32b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull deepseek-r1:32b')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gemma 3 -->
+                <div class="model-card" data-provider="google" data-task-areas="coding,writing,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Gemma 3</h4>
+                        <span class="model-provider">Google</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Generation</span>
+                        <span class="capability-tag writing">Text Processing</span>
+                        <span class="capability-tag analysis">Efficient Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Lightweight and efficient model family that runs on a single GPU, optimized for resource-constrained environments.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Single GPU deployment</li>
+                            <li>Resource-efficient processing</li>
+                            <li>Fast inference times</li>
+                            <li>Edge computing applications</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 270M to 27B parameters</li>
+                            <li>Low memory footprint</li>
+                            <li>Ollama support</li>
+                            <li>Mobile optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Qwen 3 -->
+                <div class="model-card" data-provider="alibaba" data-task-areas="coding,reasoning,writing,multimodal" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">Qwen 3</h4>
+                        <span class="model-provider">Alibaba</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Multimodal</span>
+                        <span class="capability-tag reasoning">Advanced Reasoning</span>
+                        <span class="capability-tag coding">Code Expert</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Latest generation of Qwen models offering comprehensive dense and mixture-of-experts (MoE) models with multilingual support.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Multilingual processing</li>
+                            <li>Long context understanding</li>
+                            <li>Code generation across languages</li>
+                            <li>Mixed expert architectures</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 0.6B to 235B parameters</li>
+                            <li>128K context window</li>
+                            <li>18T token training dataset</li>
+                            <li>Ollama and GitHub Copilot support</li>
+                        </ul>
+                    </div>
+                    <div class="model-ollama">
+                        <h5>🐋 Ollama Installation:</h5>
+                        <div class="ollama-variants">
+                            <div class="ollama-variant">
+                                <span class="variant-name">Qwen3:0.6b</span>
+                                <span class="variant-size">~400MB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull qwen3:0.6b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull qwen3:0.6b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">Qwen3:4b</span>
+                                <span class="variant-size">~2.5GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull qwen3:4b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull qwen3:4b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">Qwen3:14b</span>
+                                <span class="variant-size">~8GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull qwen3:14b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull qwen3:14b')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Llama -->
+                <div class="model-card" data-provider="meta" data-task-areas="coding,analysis" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">Code Llama</h4>
+                        <span class="model-provider">Meta</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Specialist</span>
+                        <span class="capability-tag analysis">Code Analysis</span>
+                        <span class="capability-tag reasoning">Logic Reasoning</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Specialized coding model built on Llama architecture, optimized for code generation, discussion, and debugging.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Code completion and generation</li>
+                            <li>Bug detection and fixing</li>
+                            <li>Code explanation and documentation</li>
+                            <li>Multi-language programming</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 7B, 13B, 34B, 70B</li>
+                            <li>Code-focused training</li>
+                            <li>GitHub Copilot integration</li>
+                            <li>Open-source license</li>
+                        </ul>
+                    </div>
+                    <div class="model-ollama">
+                        <h5>🐋 Ollama Installation:</h5>
+                        <div class="ollama-variants">
+                            <div class="ollama-variant">
+                                <span class="variant-name">CodeLlama:7b</span>
+                                <span class="variant-size">~4GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull codellama:7b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull codellama:7b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">CodeLlama:13b</span>
+                                <span class="variant-size">~7GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull codellama:13b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull codellama:13b')">📋</button>
+                                </div>
+                            </div>
+                            <div class="ollama-variant">
+                                <span class="variant-name">CodeLlama:34b</span>
+                                <span class="variant-size">~19GB</span>
+                                <div class="command-container">
+                                    <code class="ollama-command">ollama pull codellama:34b</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('ollama pull codellama:34b')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phi-3 -->
+                <div class="model-card" data-provider="phi" data-task-areas="reasoning,coding,writing" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Phi-3</h4>
+                        <span class="model-provider">Microsoft</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Lightweight Reasoning</span>
+                        <span class="capability-tag coding">Code Assistant</span>
+                        <span class="capability-tag writing">Text Generation</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Lightweight state-of-the-art small language models designed for efficiency without compromising performance.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Efficient small model performance</li>
+                            <li>Mobile and edge deployment</li>
+                            <li>Quick response times</li>
+                            <li>Resource-constrained environments</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 3.8B, 14B parameters</li>
+                            <li>High performance-to-size ratio</li>
+                            <li>Ollama support</li>
+                            <li>Microsoft ecosystem integration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- LLaVA -->
+                <div class="model-card" data-provider="meta" data-task-areas="multimodal,analysis,creative" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">LLaVA</h4>
+                        <span class="model-provider">Meta</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Vision & Language</span>
+                        <span class="capability-tag analysis">Visual Analysis</span>
+                        <span class="capability-tag creative">Visual Creativity</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Large Language and Vision Assistant combining visual understanding with language processing for multimodal applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Image analysis and description</li>
+                            <li>Visual question answering</li>
+                            <li>Chart and diagram interpretation</li>
+                            <li>Visual content creation assistance</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 7B, 13B, 34B parameters</li>
+                            <li>Vision-language integration</li>
+                            <li>Ollama support</li>
+                            <li>Open-source architecture</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DeepSeek Coder -->
+                <div class="model-card" data-provider="deepseek" data-task-areas="coding,analysis" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">DeepSeek Coder</h4>
+                        <span class="model-provider">DeepSeek</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Expert</span>
+                        <span class="capability-tag analysis">Code Analysis</span>
+                        <span class="capability-tag reasoning">Logic Reasoning</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Specialized coding model trained on two trillion code and natural language tokens for superior programming assistance.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Complex code generation</li>
+                            <li>Code debugging and optimization</li>
+                            <li>Multi-language programming</li>
+                            <li>Large codebase understanding</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 6.7B, 33B parameters</li>
+                            <li>2T token training dataset</li>
+                            <li>Ollama support</li>
+                            <li>GitHub Copilot integration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Qwen2.5 Coder -->
+                <div class="model-card" data-provider="alibaba" data-task-areas="coding,analysis" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">Qwen2.5 Coder</h4>
+                        <span class="model-provider">Alibaba</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag coding">Code Specialist</span>
+                        <span class="capability-tag analysis">Code Analysis</span>
+                        <span class="capability-tag reasoning">Multi-language</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Specialized coding variant of Qwen2.5 optimized for programming tasks with enhanced code understanding.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Balanced coding performance</li>
+                            <li>Multi-language code generation</li>
+                            <li>Code completion and suggestions</li>
+                            <li>Efficient resource usage</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Sizes: 7B, 32B parameters</li>
+                            <li>Code-optimized training</li>
+                            <li>Ollama support</li>
+                            <li>Multilingual code support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Nomic Embed Text -->
+                <div class="model-card" data-provider="nomic" data-task-areas="analysis,research" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">Nomic Embed Text</h4>
+                        <span class="model-provider">Nomic AI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag analysis">Text Embedding</span>
+                        <span class="capability-tag research">Semantic Search</span>
+                        <span class="capability-tag analysis">Vector Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>High-quality text embedding model for semantic search, retrieval, and text similarity applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Text embeddings and vectors</li>
+                            <li>Semantic similarity analysis</li>
+                            <li>Information retrieval</li>
+                            <li>Document clustering</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Optimized embedding dimensions</li>
+                            <li>Fast inference speed</li>
+                            <li>Ollama support</li>
+                            <li>RAG applications</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Snowflake Arctic Embed -->
+                <div class="model-card" data-provider="snowflake" data-task-areas="analysis,research" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">Arctic Embed</h4>
+                        <span class="model-provider">Snowflake</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag analysis">Enterprise Embedding</span>
+                        <span class="capability-tag research">Data Analysis</span>
+                        <span class="capability-tag analysis">Retrieval</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Enterprise-grade embedding model designed for data analysis, retrieval, and enterprise search applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Enterprise data embedding</li>
+                            <li>Large-scale retrieval systems</li>
+                            <li>Data warehouse integration</li>
+                            <li>Business intelligence applications</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Enterprise-optimized performance</li>
+                            <li>Snowflake ecosystem integration</li>
+                            <li>Ollama support</li>
+                            <li>Scalable deployment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Claude 3.7 Sonnet -->
+                <div class="model-card" data-provider="anthropic" data-task-areas="coding,reasoning,writing,analysis" data-model-type="text">
+                    <div class="model-header">
+                        <h4 class="model-name">Claude 3.7 Sonnet</h4>
+                        <span class="model-provider">Anthropic</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Superior Reasoning</span>
+                        <span class="capability-tag coding">Advanced Coding</span>
+                        <span class="capability-tag analysis">Complex Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Anthropic's most advanced model to date, excelling in development tasks requiring structured reasoning across large codebases.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Large codebase understanding</li>
+                            <li>Structured reasoning tasks</li>
+                            <li>Complex software architecture</li>
+                            <li>Advanced code refactoring</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Enhanced reasoning capabilities</li>
+                            <li>GitHub Copilot integration</li>
+                            <li>Extended context handling</li>
+                            <li>Constitutional AI safety</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- o3-mini -->
+                <div class="model-card" data-provider="openai" data-task-areas="reasoning,coding,math" data-model-type="specialized">
+                    <div class="model-header">
+                        <h4 class="model-name">o3-mini</h4>
+                        <span class="model-provider">OpenAI</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag reasoning">Fast Reasoning</span>
+                        <span class="capability-tag coding">Coding Performance</span>
+                        <span class="capability-tag math">Math Specialist</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Fast, cost-effective reasoning model designed to deliver coding performance while maintaining lower latency and resource usage.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Fast reasoning tasks</li>
+                            <li>Cost-effective coding assistance</li>
+                            <li>Low-latency applications</li>
+                            <li>Efficient resource utilization</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Optimized for speed and cost</li>
+                            <li>GitHub Copilot integration</li>
+                            <li>Advanced reasoning architecture</li>
+                            <li>Production-ready deployment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gemini Flash 2.0 -->
+                <div class="model-card" data-provider="google" data-task-areas="multimodal,analysis,creative,reasoning" data-model-type="multimodal">
+                    <div class="model-header">
+                        <h4 class="model-name">Gemini Flash 2.0</h4>
+                        <span class="model-provider">Google</span>
+                    </div>
+                    <div class="model-capabilities">
+                        <span class="capability-tag multimodal">Multimodal</span>
+                        <span class="capability-tag reasoning">Fast Reasoning</span>
+                        <span class="capability-tag analysis">Real-time Analysis</span>
+                    </div>
+                    <div class="model-description">
+                        <p>Next-generation Gemini Flash model with enhanced multimodal capabilities and improved speed for real-time applications.</p>
+                    </div>
+                    <div class="model-excels">
+                        <h5>Excels at:</h5>
+                        <ul>
+                            <li>Real-time multimodal processing</li>
+                            <li>Fast inference and responses</li>
+                            <li>Image and video analysis</li>
+                            <li>Interactive applications</li>
+                        </ul>
+                    </div>
+                    <div class="model-additional">
+                        <h5>Additional Capabilities:</h5>
+                        <ul>
+                            <li>Enhanced speed optimization</li>
+                            <li>GitHub Copilot integration</li>
+                            <li>Improved multimodal training</li>
+                            <li>Google ecosystem integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- AI Tools Comparison Matrix -->
-        <div class="grid-header">
-            <h2 class="grid-title">🔍 AI Tools Comparison Matrix</h2>
-            <p class="grid-subtitle">Comprehensive analysis of 20+ AI platforms, coding assistants, and development tools</p>
+        <div class="insights-section">
+            <h3 class="insights-title">🔍 AI Tools Comparison Matrix</h3>
+            <p class="insights-subtitle">Comprehensive analysis of 20+ AI platforms, coding assistants, and development tools</p>
+            
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">All Tools</button>
+                <button class="category-btn" data-category="foundation">Foundation Models</button>
+                <button class="category-btn" data-category="development">Development Tools</button>
+                <button class="category-btn" data-category="coding">Coding Assistants</button>
+                <button class="category-btn" data-category="platform">All-in-One Platforms</button>
+                <button class="category-btn" data-category="terminal">Terminal Tools</button>
+            </div>
             
             <div class="sort-controls">
                 <label for="sortSelect" class="sort-label">Sort by:</label>
@@ -2225,9 +4248,8 @@
                     <option value="security">Security Level</option>
                 </select>
             </div>
-        </div>
 
-        <div class="tools-grid" id="toolsGrid">
+            <div class="tools-grid" id="toolsGrid">
             <!-- Foundation Model Providers -->
             <div class="tool-card" data-category="foundation" data-price="medium" data-security="enterprise" data-feature="enterprise-security">
                 <div class="tool-header">
@@ -4048,32 +6070,42 @@
             <div class="insights-grid">
                 <div class="insight-card">
                     <h4 class="insight-title">🔒 Security & Compliance Strategy</h4>
-                    <p class="insight-text"><strong>For CTOs:</strong> Prioritize SOC 2 Type 2, HIPAA, and FedRAMP compliance. AWS Bedrock offers government-grade security, while Anthropic Claude provides constitutional AI safety. <strong>For Security Teams:</strong> Open-source solutions like Cline provide audit transparency and on-premises deployment options.</p>
+                    <p class="insight-text"><strong>For CTOs:</strong> Prioritize SOC 2 Type 2, HIPAA, and FedRAMP compliance. GitHub Copilot Enterprise offers advanced security features, while Claude provides constitutional AI safety. <strong>For Security Teams:</strong> Consider local deployment options like Ollama for sensitive codebases. Implement code scanning for AI-generated code and establish AI governance policies.</p>
                 </div>
                 
                 <div class="insight-card">
                     <h4 class="insight-title">💰 Financial Planning & ROI</h4>
-                    <p class="insight-text"><strong>For Finance Teams:</strong> Pay-per-use models (AWS Bedrock, OpenAI API) offer better cost predictability than seat-based pricing for variable workloads. <strong>For Startups:</strong> Free tiers can provide 6-12 months of development runway. Consider total cost of ownership including training and integration time.</p>
+                    <p class="insight-text"><strong>For Finance Teams:</strong> API-based models (OpenAI, Anthropic) offer usage-based pricing, while GitHub Copilot provides predictable per-seat costs. <strong>For Startups:</strong> Open-source models via Ollama can provide significant cost savings. Factor in productivity gains: 25-40% faster development reported across teams using AI coding assistants.</p>
                 </div>
                 
                 <div class="insight-card">
                     <h4 class="insight-title">🔄 Integration & Workflow Strategy</h4>
-                    <p class="insight-text"><strong>For Engineering Managers:</strong> Match tools to existing workflows - GitHub Copilot for Git-heavy teams, Warp Terminal for DevOps, AWS Kiro for cloud-native development, Tabnine for privacy-sensitive environments. <strong>For Platform Teams:</strong> Prioritize tools with robust APIs and SSO integration for enterprise adoption.</p>
+                    <p class="insight-text"><strong>For Engineering Managers:</strong> Multi-model approach reduces risk - GitHub Copilot for day-to-day coding, Claude for complex reasoning, DeepSeek for specialized tasks. <strong>For Platform Teams:</strong> Implement MCP servers for seamless AI tool integration. Prioritize tools with robust APIs and SSO support for enterprise adoption.</p>
                 </div>
                 
                 <div class="insight-card">
                     <h4 class="insight-title">🔮 Future-Proofing & Technology Strategy</h4>
-                    <p class="insight-text"><strong>For Enterprise Architects:</strong> Multi-model platforms (AWS Bedrock) and MCP-compatible tools reduce vendor lock-in. <strong>For Tech Leaders:</strong> Open-source solutions provide strategic flexibility as AI capabilities rapidly evolve. Consider tools that support both proprietary and open-source models.</p>
+                    <p class="insight-text"><strong>For Enterprise Architects:</strong> Avoid vendor lock-in with multi-model platforms and open-source alternatives. <strong>For Tech Leaders:</strong> Invest in local AI infrastructure (Ollama) and MCP ecosystem. The rapid evolution from GPT-3 to o1-preview demonstrates the importance of flexible, adaptable AI strategies.</p>
                 </div>
                 
                 <div class="insight-card">
                     <h4 class="insight-title">📊 Performance & Productivity Metrics</h4>
-                    <p class="insight-text"><strong>For Engineering Leaders:</strong> Track code generation speed, bug reduction rates, and developer satisfaction scores. Tools like Cursor and Windsurf offer detailed analytics. <strong>For Product Teams:</strong> Measure time-to-prototype and feature delivery velocity to quantify AI tooling ROI.</p>
+                    <p class="insight-text"><strong>For Engineering Leaders:</strong> Track code generation speed, bug reduction rates, and developer satisfaction. Measure: lines of AI-generated code, time to first working prototype, code review efficiency. <strong>For Product Teams:</strong> Monitor feature delivery velocity and technical debt reduction to quantify AI tooling ROI.</p>
                 </div>
                 
                 <div class="insight-card">
                     <h4 class="insight-title">🎯 Team Adoption & Change Management</h4>
-                    <p class="insight-text"><strong>For HR & Training Teams:</strong> Start with pilot programs using tools with gentle learning curves (GitHub Copilot, Trae AI, Tabnine). <strong>For Team Leads:</strong> Provide comprehensive training and establish best practices for AI-assisted development to maximize adoption and effectiveness.</p>
+                    <p class="insight-text"><strong>For HR & Training Teams:</strong> Start with pilot programs using GitHub Copilot or Claude. Provide AI ethics training and establish guidelines for responsible AI use. <strong>For Team Leads:</strong> Create AI-assisted coding best practices, peer review processes, and mentorship programs to maximize adoption and minimize risks.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 class="insight-title">🌐 Multi-Model Strategy</h4>
+                    <p class="insight-text"><strong>For Technical Directors:</strong> Different models excel at different tasks - o1-preview for complex reasoning, CodeLlama for specialized coding, Claude for analysis and documentation. <strong>For Architects:</strong> Design systems that can leverage multiple AI models based on task requirements, cost constraints, and performance needs.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 class="insight-title">⚡ Local vs Cloud AI Strategy</h4>
+                    <p class="insight-text"><strong>For Infrastructure Teams:</strong> Local models (Ollama) provide data privacy and cost control for high-volume usage. Cloud models offer cutting-edge capabilities and scalability. <strong>For Decision Makers:</strong> Hybrid approach - local for sensitive/repetitive tasks, cloud for complex reasoning and latest features.</p>
                 </div>
             </div>
         </div>
@@ -4083,31 +6115,40 @@
             <div class="recommendation-title">🎯 Recommendations by Company Role & Use Case</div>
             
             <div class="use-case">
-                <strong>For CTOs & Engineering Leadership:</strong> AWS Bedrock for enterprise scalability, Anthropic Claude for safety compliance, or OpenAI Enterprise for cutting-edge capabilities with vendor support
+                <strong>For CTOs & Engineering Leadership:</strong> GitHub Copilot Enterprise for organization-wide deployment, Claude Enterprise for safety-critical applications, or multi-model strategy with OpenAI + Anthropic APIs for flexibility and risk mitigation
             </div>
             
             <div class="use-case">
-                <strong>For Development Team Leads:</strong> Cursor for team productivity workflows, GitHub Copilot for seamless Git integration, Windsurf for advanced agentic development patterns, or Tabnine for privacy-first code assistance
+                <strong>For Development Team Leads:</strong> GitHub Copilot for seamless Git integration, Claude for complex code analysis and documentation, or Ollama + DeepSeek for cost-effective local deployment with enterprise control
             </div>
             
             <div class="use-case">
-                <strong>For Individual Senior Engineers:</strong> Cline for maximum control and transparency, Kilo Code for extensive model access, AWS Kiro for cloud-native development, or ZenCode AI for code quality focus
+                <strong>For Senior Engineers & Architects:</strong> Multi-model approach: Claude 3.5 Sonnet for complex reasoning, o1-preview for mathematical problems, CodeLlama for specialized coding tasks, and Qwen for multilingual projects
             </div>
             
             <div class="use-case">
-                <strong>For DevOps & Platform Engineers:</strong> Warp Terminal for infrastructure automation, AWS Bedrock for scalable model deployment, or open-source solutions for custom integrations
+                <strong>For DevOps & Platform Engineers:</strong> Local Ollama deployment for infrastructure automation, GitHub Copilot for CI/CD pipeline development, or cloud APIs with proper rate limiting and monitoring for scalable operations
             </div>
             
             <div class="use-case">
-                <strong>For Security & Compliance Teams:</strong> Anthropic Claude for safety guarantees, AWS Bedrock for regulatory compliance, or open-source solutions like Cline for audit transparency
+                <strong>For Security & Compliance Teams:</strong> Ollama for air-gapped environments, Claude for safety-focused AI assistance, or GitHub Copilot Enterprise with advanced security features and audit trails
             </div>
             
             <div class="use-case">
-                <strong>For Budget-Conscious Startups:</strong> Trae AI for free premium model access, Galaxy.ai for multiple AI needs, or Cline + Kilo Code for open-source flexibility
+                <strong>For Budget-Conscious Startups:</strong> Ollama with open-source models (DeepSeek, CodeLlama, Qwen), GitHub Copilot Individual for core development, or API usage-based models (OpenAI, Anthropic) for variable workloads
             </div>
             
             <div class="use-case">
-                <strong>For Product Teams & Prototyping:</strong> AWS Kiro for spec-driven development, Trae AI for rapid experimentation, Cursor for design-to-code workflows, v0 by Vercel for React/Next.js components, or Loveable for no-code app creation
+                <strong>For Product Teams & Prototyping:</strong> Claude for rapid prototyping and analysis, GPT-4o for multimodal applications, or Gemini for integration with Google Workspace and long-context document processing
+            </div>
+            
+            <div class="use-case">
+                <strong>For Data Science & ML Teams:</strong> Local Ollama deployment for model experimentation, Claude for data analysis and insights, or specialized models like Qwen for multilingual data processing
+            </div>
+            
+            <div class="use-case">
+                <strong>For Quality Assurance Teams:</strong> Claude for test case generation and analysis, GitHub Copilot for automated testing code, or o1-preview for complex test scenario reasoning
+            </div>
             </div>
             
             <div class="use-case">
@@ -4291,6 +6332,69 @@
                                 <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/notion" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
                             </div>
                             <p class="mcp-description">Knowledge management and documentation integration</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Docker MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/docker" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Container management and orchestration</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Kubernetes MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/kubernetes" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Cluster management and deployment automation</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Jira MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/jira" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Issue tracking and project management integration</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Confluence MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/confluence" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Documentation and wiki management</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Terraform MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/terraform" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Infrastructure as code automation</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Postgres MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Database management and query optimization</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Redis MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/redis" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Cache management and real-time data operations</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Elasticsearch MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/elasticsearch" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">Search and analytics platform integration</p>
+                        </div>
+                        <div class="mcp-tool">
+                            <div class="mcp-tool-header">
+                                <h5 class="mcp-tool-name">Monitoring MCP</h5>
+                                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/monitoring" target="_blank" rel="noopener noreferrer" class="mcp-link">GitHub →</a>
+                            </div>
+                            <p class="mcp-description">System monitoring and alerting automation</p>
                         </div>
                     </div>
                 </div>
@@ -4608,44 +6712,20 @@
             </div>
         </div>
 
-
-        <!-- Credits -->
-        <div class="credits-section">
-            <div class="credits-content">
-                <div class="credits-header">
-                    <h3 class="credits-main-title">👨‍💻 Document Credits</h3>
-                    <p class="credits-subtitle">Created and maintained by Mike Cheel</p>
+        <!-- Disclaimer & Last Updated -->
+        <div class="insights-section">
+            <h3 class="insights-title">📋 Disclaimer & Last Updated</h3>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4 class="insight-title">⚠️ Important Notice</h4>
+                    <p class="insight-text"><strong>Disclaimer:</strong> This comparison is provided for informational purposes and based on available information and personal experience. Pricing, features, capabilities, and availability may change rapidly. Please verify current information on official websites before making decisions.</p>
                 </div>
                 
-                <div class="credits-grid">
-                    <div class="credit-card">
-                        <h4 class="credit-title">📝 Research & Analysis</h4>
-                        <p class="credit-text">Comprehensive market research and competitive analysis compiled from official sources, documentation, and industry reports.</p>
-                    </div>
-                    
-                    <div class="credit-card">
-                        <h4 class="credit-title">🤖 AI-Assisted Development</h4>
-                        <p class="credit-text">Document structure, content organization, and technical implementation enhanced with Claude AI assistance.</p>
-                    </div>
-                    
-                    <div class="credit-card">
-                        <h4 class="credit-title">🔄 Regular Updates</h4>
-                        <p class="credit-text">Information updated regularly to reflect the rapidly evolving AI tools landscape. Check timestamp for latest revision.</p>
-                    </div>
+                <div class="insight-card">
+                    <h4 class="insight-title">🕐 Last Updated</h4>
+                    <p class="insight-text">This document was last updated on <strong>August 17, 2025 at 12:26 PM EDT</strong>. Information is current as of this date.</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- Disclaimer -->
-        <div class="disclaimer">
-            <p><strong>Disclaimer:</strong> This comparison is provided for informational purposes and based on available information and personal experience. Pricing, features, capabilities, and availability may change rapidly. Please verify current information on official websites before making decisions.</p>
-        </div>
-
-        <!-- Last Updated -->
-        <div class="last-updated">
-            <div class="last-updated-content">
-                <span class="last-updated-icon">🕐</span>
-                <span class="last-updated-text">Last updated: August 17, 2025 at 12:26 PM EDT</span>
             </div>
         </div>
     </div>
@@ -4944,9 +7024,373 @@
             });
         });
 
+        // AI Models filtering functionality
+        const providerFilter = document.getElementById('providerFilter');
+        const taskAreaFilter = document.getElementById('taskAreaFilter');
+        const modelTypeFilter = document.getElementById('modelTypeFilter');
+        const modelsSearchInput = document.getElementById('modelsSearchInput');
+        const modelsGrid = document.getElementById('modelsGrid');
+        const modelsSortSelect = document.getElementById('modelsSortSelect');
+
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Find the button that was clicked and show feedback
+                const buttons = document.querySelectorAll('.copy-btn');
+                buttons.forEach(btn => {
+                    if (btn.onclick.toString().includes(text)) {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '✓';
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.classList.remove('copied');
+                        }, 1500);
+                    }
+                });
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // Models sorting functionality
+        function getModelName(card) {
+            const modelNameElement = card.querySelector('.model-name');
+            return modelNameElement ? modelNameElement.textContent.trim() : '';
+        }
+
+        function getModelProvider(card) {
+            const providerElement = card.querySelector('.model-provider');
+            return providerElement ? providerElement.textContent.trim() : '';
+        }
+
+        function getModelTaskArea(card) {
+            const taskAreas = card.dataset.taskAreas || '';
+            return taskAreas.split(',')[0] || ''; // Get first task area
+        }
+
+        function sortModels() {
+            const sortValue = modelsSortSelect.value;
+            const modelCards = Array.from(document.querySelectorAll('.model-card'));
+            
+            modelCards.sort((a, b) => {
+                switch (sortValue) {
+                    case 'name':
+                        return getModelName(a).localeCompare(getModelName(b));
+                    case 'name-desc':
+                        return getModelName(b).localeCompare(getModelName(a));
+                    case 'provider':
+                        const providerA = getModelProvider(a);
+                        const providerB = getModelProvider(b);
+                        return providerA.localeCompare(providerB);
+                    case 'task-area':
+                        const taskA = getModelTaskArea(a);
+                        const taskB = getModelTaskArea(b);
+                        return taskA.localeCompare(taskB);
+                    case 'model-type':
+                        const typeA = a.dataset.modelType || '';
+                        const typeB = b.dataset.modelType || '';
+                        return typeA.localeCompare(typeB);
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Re-append sorted cards to the grid
+            modelCards.forEach(card => modelsGrid.appendChild(card));
+        }
+
+        function filterModels() {
+            const providerValue = providerFilter.value;
+            const taskAreaValue = taskAreaFilter.value;
+            const modelTypeValue = modelTypeFilter.value;
+            const searchValue = modelsSearchInput.value.toLowerCase();
+            
+            const modelCards = document.querySelectorAll('.model-card');
+            
+            modelCards.forEach(card => {
+                const provider = card.dataset.provider;
+                const taskAreas = card.dataset.taskAreas;
+                const modelType = card.dataset.modelType;
+                const content = card.textContent.toLowerCase();
+                
+                let show = true;
+                
+                // Provider filter
+                if (providerValue !== 'all' && provider !== providerValue) {
+                    show = false;
+                }
+                
+                // Task area filter
+                if (taskAreaValue !== 'all' && !taskAreas.includes(taskAreaValue)) {
+                    show = false;
+                }
+                
+                // Model type filter
+                if (modelTypeValue !== 'all' && modelType !== modelTypeValue) {
+                    show = false;
+                }
+                
+                // Search filter
+                if (searchValue && !content.includes(searchValue)) {
+                    show = false;
+                }
+                
+                if (show) {
+                    card.classList.remove('hidden');
+                    card.style.display = 'flex';
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Models filter event listeners
+        if (providerFilter) {
+            providerFilter.addEventListener('change', filterModels);
+        }
+        if (taskAreaFilter) {
+            taskAreaFilter.addEventListener('change', filterModels);
+        }
+        if (modelTypeFilter) {
+            modelTypeFilter.addEventListener('change', filterModels);
+        }
+        if (modelsSearchInput) {
+            modelsSearchInput.addEventListener('input', filterModels);
+        }
+        if (modelsSortSelect) {
+            modelsSortSelect.addEventListener('change', sortModels);
+        }
+
+        // Collapsible sections functionality
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.section-toggle');
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                content.classList.add('expanded');
+                toggle.textContent = '▲';
+                header.classList.add('active');
+            } else {
+                content.classList.remove('expanded');
+                content.classList.add('collapsed');
+                toggle.textContent = '▼';
+                header.classList.remove('active');
+            }
+        }
+
+        // Initialize collapsible sections
+        function initializeCollapsibleSections() {
+            console.log('Initializing collapsible sections...');
+            // Convert major sections to collapsible
+            const sectionsToMakeCollapsible = [
+                { selector: '.comparison-section', title: '📊 AI Tools Quick Reference Matrix', subtitle: 'Interactive comparison table with filtering and sorting capabilities' },
+                { selector: '.recommendation-box', title: '🎯 Recommendations by Company Role & Use Case', subtitle: 'Tailored AI tool recommendations for different organizational roles' }
+            ];
+
+            sectionsToMakeCollapsible.forEach(config => {
+                const sections = document.querySelectorAll(config.selector);
+                sections.forEach((section, index) => {
+                if (section && !section.classList.contains('collapsible-processed')) {
+                    section.classList.add('collapsible-processed');
+                    // Create wrapper
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'collapsible-section ' + section.className;
+                    
+                    // Create header
+                    const header = document.createElement('div');
+                    header.className = 'section-header active';
+                    header.onclick = () => toggleSection(header);
+                    
+                    const titleDiv = document.createElement('div');
+                    const title = document.createElement('h3');
+                    title.className = 'section-title';
+                    title.textContent = config.title;
+                    
+                    const subtitle = document.createElement('p');
+                    subtitle.className = 'section-subtitle';
+                    subtitle.textContent = config.subtitle;
+                    
+                    titleDiv.appendChild(title);
+                    titleDiv.appendChild(subtitle);
+                    
+                    const toggle = document.createElement('button');
+                    toggle.className = 'section-toggle';
+                    toggle.innerHTML = '▲';
+                    
+                    header.appendChild(titleDiv);
+                    header.appendChild(toggle);
+                    
+                    // Create content wrapper
+                    const contentWrapper = document.createElement('div');
+                    contentWrapper.className = 'section-content expanded';
+                    
+                    const innerWrapper = document.createElement('div');
+                    innerWrapper.className = 'section-inner';
+                    
+                    // Move original content
+                    const originalContent = section.innerHTML;
+                    innerWrapper.innerHTML = originalContent;
+                    contentWrapper.appendChild(innerWrapper);
+                    
+                    // Remove original title/subtitle from content
+                    const originalTitle = innerWrapper.querySelector('h3, .insights-title, .models-analysis-title, .recommendation-title');
+                    const originalSubtitle = innerWrapper.querySelector('.models-analysis-subtitle');
+                    if (originalTitle) originalTitle.remove();
+                    if (originalSubtitle) originalSubtitle.remove();
+                    
+                    // Assemble wrapper
+                    wrapper.appendChild(header);
+                    wrapper.appendChild(contentWrapper);
+                    
+                    // Replace original section
+                    section.parentNode.replaceChild(wrapper, section);
+                }
+                });
+            });
+
+            // Handle insights sections specifically by their titles
+            const insightsSections = document.querySelectorAll('.insights-section');
+            insightsSections.forEach(section => {
+                if (!section.classList.contains('collapsible-processed')) {
+                    const titleElement = section.querySelector('.insights-title');
+                    if (titleElement) {
+                        const titleText = titleElement.textContent.trim();
+                        let config = {};
+                        
+                        if (titleText.includes('Key Insights for Software Companies')) {
+                            config = { title: '💡 Key Insights for Software Companies', subtitle: 'Strategic guidance for technical decision makers and engineering teams' };
+                        } else if (titleText.includes('AI Models Comprehensive Analysis')) {
+                            config = { title: '🧬 AI Models Comprehensive Analysis', subtitle: 'Detailed breakdown of AI models, their capabilities, optimal task areas, and unique features' };
+                        } else if (titleText.includes('AI Tools Comparison Matrix')) {
+                            config = { title: '🔍 AI Tools Comparison Matrix', subtitle: 'Comprehensive analysis of 20+ AI platforms, coding assistants, and development tools' };
+                        } else if (titleText.includes('Model Context Protocol')) {
+                            config = { title: '🔌 Model Context Protocol (MCP) Server Ecosystem', subtitle: 'Enterprise integrations for AI assistant capabilities' };
+                        } else if (titleText.includes('AI Tools Market Landscape')) {
+                            config = { title: '🌐 AI Tools Market Landscape Overview', subtitle: 'Comprehensive market analysis and competitive intelligence' };
+                        } else if (titleText.includes('Disclaimer & Last Updated')) {
+                            config = { title: '📋 Disclaimer & Last Updated', subtitle: 'Important information and document currency details' };
+                        }
+
+                        if (config.title) {
+                            section.classList.add('collapsible-processed');
+                            
+                            // Create wrapper
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'collapsible-section ' + section.className;
+                            
+                            // Create header
+                            const header = document.createElement('div');
+                            header.className = 'section-header active';
+                            header.onclick = () => toggleSection(header);
+                            
+                            const titleDiv = document.createElement('div');
+                            const title = document.createElement('h3');
+                            title.className = 'section-title';
+                            title.textContent = config.title;
+                            
+                            const subtitle = document.createElement('p');
+                            subtitle.className = 'section-subtitle';
+                            subtitle.textContent = config.subtitle;
+                            
+                            titleDiv.appendChild(title);
+                            titleDiv.appendChild(subtitle);
+                            
+                            const toggle = document.createElement('button');
+                            toggle.className = 'section-toggle';
+                            toggle.innerHTML = '▲';
+                            
+                            header.appendChild(titleDiv);
+                            header.appendChild(toggle);
+                            
+                            // Create content wrapper
+                            const contentWrapper = document.createElement('div');
+                            contentWrapper.className = 'section-content expanded';
+                            
+                            const innerWrapper = document.createElement('div');
+                            innerWrapper.className = 'section-inner';
+                            
+                            // Move original content
+                            const originalContent = section.innerHTML;
+                            innerWrapper.innerHTML = originalContent;
+                            contentWrapper.appendChild(innerWrapper);
+                            
+                            // Remove original title/subtitle from content
+                            const originalTitle = innerWrapper.querySelector('h3, .insights-title');
+                            if (originalTitle) originalTitle.remove();
+                            
+                            // Assemble wrapper
+                            wrapper.appendChild(header);
+                            wrapper.appendChild(contentWrapper);
+                            
+                            // Replace original section
+                            section.parentNode.replaceChild(wrapper, section);
+                        }
+                    }
+                }
+            });
+        }
+
         // Add smooth transitions when styles change
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+            initializeCollapsibleSections();
+            
+            // Collapse/Expand All functionality
+            const collapseAllBtn = document.getElementById('collapseAllBtn');
+            let allCollapsed = false;
+            
+            if (collapseAllBtn) {
+                collapseAllBtn.addEventListener('click', function() {
+                    console.log('Collapse button clicked!');
+                    const collapseText = this.querySelector('.collapse-text');
+                    const collapseIcon = this.querySelector('.collapse-icon');
+                    const allSectionHeaders = document.querySelectorAll('.section-header');
+                    console.log('Found', allSectionHeaders.length, 'section headers');
+                    
+                    allCollapsed = !allCollapsed;
+                    
+                    allSectionHeaders.forEach(header => {
+                        const content = header.nextElementSibling;
+                        const toggle = header.querySelector('.section-toggle');
+                        
+                        if (content && toggle) {
+                            if (allCollapsed) {
+                                // Collapse all
+                                content.classList.remove('expanded');
+                                content.classList.add('collapsed');
+                                header.classList.remove('expanded');
+                                toggle.textContent = '▼';
+                            } else {
+                                // Expand all
+                                content.classList.remove('collapsed');
+                                content.classList.add('expanded');
+                                header.classList.add('expanded');
+                                toggle.textContent = '▲';
+                            }
+                        }
+                    });
+                    
+                    // Update button text and style
+                    if (allCollapsed) {
+                        if (collapseText) collapseText.textContent = 'Expand All Sections';
+                        this.classList.add('expanded');
+                        if (collapseIcon) collapseIcon.textContent = '📖';
+                    } else {
+                        if (collapseText) collapseText.textContent = 'Collapse All Sections';
+                        this.classList.remove('expanded');
+                        if (collapseIcon) collapseIcon.textContent = '📋';
+                    }
+                });
+            }
         });
     </script>
 </body>
